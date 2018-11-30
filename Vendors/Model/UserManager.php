@@ -27,10 +27,18 @@ abstract class UserManager extends Manager
     abstract public function delete($id);
 
     /**
-    * Method to tell the total number of user
+    * Method to get a user by his family Name
     * @return bool
     */
-    abstract public function getUser($name);
+    abstract public function getUserByFamilyName($familyName);
+
+    /**
+    * Method to get a user by his id
+    * @return bool
+    */
+    abstract public function getUserById($id);
+
+   
 
     /**
     * Method to confirm password and name of user

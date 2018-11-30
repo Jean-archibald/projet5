@@ -79,6 +79,13 @@ elseif(preg_match('#liste-abonne-([0-9]+)#', $url , $params))
     require __DIR__.'/Controller/Backend/listUsersController.php';
 }
 
+elseif(preg_match('#abonne-([0-9]+)#', $url , $params))
+{
+    $title = 'Modifié abonné';
+    $id = $params[1];
+    require __DIR__.'/Controller/Backend/modifyUserController.php';
+}
+
 elseif(preg_match('#corbeille#', $url , $params))
 {
     $title = 'Corbeille';

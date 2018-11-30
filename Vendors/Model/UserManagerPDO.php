@@ -43,11 +43,28 @@ class UserManagerPDO extends UserManager
     /**
     * @see UserManager::confirm()
     */
-    public function getUser($name)
+    public function getUserByFamilyName($familyName)
     {
-        $request = $this->dao->prepare('SELECT id, name, password
-        FROM users WHERE name = :name');
-        $request->bindValue(':name', $name);
+        $request = $this->dao->prepare('SELECT id, familyName, firstName, email, password
+        FROM users WHERE familyName = :familyName');
+        $request->bindValue(':familyName', $familyName);
+        $request->execute();
+
+        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
+
+        $user = $request->fetch();
+
+        return $user;
+    }
+
+    /**
+    * @see UserManager::confirm()
+    */
+    public function getUserById($id)
+    {
+        $request = $this->dao->prepare('SELECT id, familyName, firstName, email, password
+        FROM users WHERE id = :id');
+        $request->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $request->execute();
 
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
@@ -91,14 +108,14 @@ class UserManagerPDO extends UserManager
     protected function modify(User $user)
     {
     $request = $this->dao->prepare('UPDATE users 
-    SET  familyName = :familyName, firstName = :firstName, mail = :mail, password = :password, status = :status, trash = :trash
+    SET  familyName = :familyName, firstName = :firstName, email = :email, password = :password, status = :status, trash = :trash
     WHERE id = :id');
    
-    $request->bindValue(':title', $user->familyName());
-    $request->bindValue(':content', $user->firstName());
-    $request->bindValue(':publish', $user->mail());
-    $request->bindValue(':publish', $user->password());
-    $request->bindValue(':publish', $user->status());
+    $request->bindValue(':familyName', $user->familyName());
+    $request->bindValue(':firstName', $user->firstName());
+    $request->bindValue(':email', $user->email());
+    $request->bindValue(':password', $user->password());
+    $request->bindValue(':status', $user->status());
     $request->bindValue(':trash', $user->trash());
     $request->bindValue(':id', $user->id(), \PDO::PARAM_INT);
 

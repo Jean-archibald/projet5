@@ -38,7 +38,7 @@ foreach ($userManager->getList($started, $usersPerPage) as $user)
     $user->status(), '</td><td>',
     $user->trash(), '</td><td>',
     $user->dateCreated()->format('d/m/Y à H\hi'),'</td><td>
-    <a href="modification-',$user->id(), '">Modifier</a>
+    <a href="abonne-',$user->id(), '">Modifier</a>
     | <a href="corbeille-', $user->id(), '">Corbeille</a>
     </td></tr>', "\n";
 }
@@ -57,7 +57,7 @@ foreach ($userManager->getList($started, $usersPerPage) as $user)
     }
     else
     {
-    echo '<a href="http://localhost:8888/projet5/liste-abonne-' .$i.'">'.$i.'</a> ';
+    echo '<a href="liste-abonne-' .$i.'">'.$i. '</a> ';
     }
     }
 ?>

@@ -3,27 +3,33 @@ $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $userManager = new \Model\UserManagerPDO($dao);
 
 ob_start();
-$valueName = "";
+$valueFamilyname = "";
+$valueFirstname = "";
 $valuePassword = "";
 
-if(isset($_POST['name']))
+if (isset($_POST['familyName']))
 {
-    $valueTitle = $_POST['name'];
+    $valueTitle = htmlspecialchars($_POST['familyName']);
+}
+
+if(isset($_POST['firstName']))
+{
+    $valueTitle = htmlspecialchars($_POST['firstName']);
 }
 
 if(isset($_POST['password']))
 {
-    $valueContent = $_POST['password'];
+    $valueContent = htmlspecialchars($_POST['password']);
 }
 
 
-if (isset($_POST['name']))
+if (isset($_POST['familyName']))
 {
-    $member = $userManager->getUser($_POST['name']);;
+    $user = $userManager->getUserByFamilyName($_POST['familyName']);;
     
-    if (!(empty($_POST['name']) || empty($_POST['password'])))
+    if (!(empty($_POST['familyName']) || empty($_POST['password']) || empty($_POST['firstName'])))
     {
-        if(($member->name() == $_POST['name']) && ($member->password() == $_POST['password']))
+        if(($user->familyName() == htmlspecialchars($_POST['familyName'])) && ($user->firstName() == htmlspecialchars($_POST['firstName'])) && ($user->password() == htmlspecialchars($_POST['password'])))
         {
             require __DIR__.'/../../View/Frontend/homeView.php';
         }
@@ -33,9 +39,9 @@ if (isset($_POST['name']))
         }
     }
 
-    else if(empty($_POST['name']) || empty($_POST['password']))
+    else if(empty($_POST['familyName']) || empty($_POST['password']) || empty($_POST['firstName']))
     {
-        $errors = $member->errors();
+        $errors = $user->errors();
     }
 }
 
@@ -51,16 +57,25 @@ if (isset($_POST['name']))
         ?>
         
         <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_NAME, $errors))
+        <?php if (isset($errors) && in_array(\Entity\User::INVALID_FAMILYNAME, $errors))
         echo '<p class="messageProbleme">Veuillez inscrire votre nom.<p/>'; ?>
-        <label for="name">Nom</label> : 
-        <input type="text" name="name" id="name" value="<?=$valueName?>"/>
+        <label for="familyName">Nom de Famille</label> : 
+        <input type="text" name="familyName" id="familyName" value="<?=htmlspecialchars($valueFamilyname)?>"/>
         </p>
+
+         <p>
+        <?php if (isset($errors) && in_array(\Entity\User::INVALID_FIRSTNAME, $errors))
+        echo '<p class="messageProbleme">Veuillez inscrire votre nom.<p/>'; ?>
+        <label for="firstName">Prénom</label> : 
+        <input type="text" name="firstName" id="firstName" value="<?=htmlspecialchars($valueFirstname)?>"/>
+        </p>
+
+        
   
         <?php if (isset($errors) && in_array(\Entity\User::INVALID_PASSWORD, $errors))
         echo '<p class="messageProbleme">Veuillez inscrire votre password.<p/>'; ?>
         <label for="password">Mot de passe</label> :   
-        <input id="text" name="password" id="password" value="<?=$valuePassword?>"/>
+        <input id="text" name="password" id="password" value="<?=htmlspecialchars($valuePassword)?>"/>
         <br/>
 
         <input type="submit" value="Se connecter"/>

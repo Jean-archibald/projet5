@@ -417,7 +417,8 @@ h1, h2, h3, h4, h5, h6 {
 .messageProbleme
 {
   color:red;
-  font-size:1.1em;
+  font-size:2em;
+  text-align:center;
 }
 
 .messageValidation
@@ -494,4 +495,11 @@ td
   font-size:2em;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+#modifyUser
+{
+  text-align: center;
+  border-width : 5px;
+  border-style: solid;
 }
