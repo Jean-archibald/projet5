@@ -428,6 +428,13 @@ font-size:2em;
 text-align:center;
 }
 
+.messageSuppression
+{
+  color:darkred;
+  font-size:2em;
+  text-align:center;
+}
+
 /*General Admin */
 
 #titleAdminSection
@@ -489,7 +496,7 @@ td
   text-align: center;
 }
 
-.infoListeAbonne
+.infoListe
 {
   text-align: center;
   font-size:2em;
@@ -502,4 +509,12 @@ td
   text-align: center;
   border-width : 5px;
   border-style: solid;
+}
+
+#deleteUser
+{
+  text-align: center;
+  border-width : 5px;
+  border-style: solid;
+  border-color: darkred;
 }

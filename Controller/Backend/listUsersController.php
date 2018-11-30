@@ -23,7 +23,7 @@ $started = ($pageNow-1)*$usersPerPage;
 ?>
 
 
-<p class="infoListeAbonne" style="text-align: center">Il y a au total <?= $usersTotals ?> abonné(s) :</p>
+<p class="infoListe">Il y a au total <?= $usersTotals ?> abonné(s) :</p>
 <table>
       <tr><th>Nom</th><th>Prenom</th><th>Email</th><th>Password</th><th>statut</th><th>corbeille</th><th>Inscription</th><th>Action</th></tr>
 <?php

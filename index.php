@@ -86,10 +86,18 @@ elseif(preg_match('#abonne-([0-9]+)#', $url , $params))
     require __DIR__.'/Controller/Backend/modifyUserController.php';
 }
 
-elseif(preg_match('#corbeille#', $url , $params))
+elseif(preg_match('#corbeille-([0-9]+)#', $url , $params))
 {
     $title = 'Corbeille';
-    require __DIR__.'/View/Backend/adminHomeView.php';
+    $id = $params[1];
+    require __DIR__.'/Controller/Backend/trashController.php';
+}
+
+elseif(preg_match('#utilisateur-supprimer-([0-9]+)#', $url , $params))
+{
+    
+    $id = $params[1];
+    require __DIR__.'/Controller/Backend/deleteUserController.php';
 }
 
 elseif(preg_match('#customizer#', $url , $params))

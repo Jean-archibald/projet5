@@ -32,6 +32,14 @@ class UserManagerPDO extends UserManager
         return $this->dao->query('SELECT COUNT(*) FROM users')->fetchColumn();
     }
 
+     /**
+     * @see UserManager::count()
+     */
+    public function countTrash()
+    {
+        return $this->dao->query('SELECT COUNT(*) FROM users WHERE trash = \'oui\' ')->fetchColumn();
+    }
+
     /**
      * @see UserManager::delete()
      */
@@ -147,6 +155,40 @@ class UserManagerPDO extends UserManager
         // Use foreach to give instance of DateTime as created date and modified date.
         foreach ($usersList as $user)
         { 
+            $user->setDateCreated(new \DateTime($user->dateCreated()));
+        }
+
+        $request->closeCursor();
+
+        return $usersList;
+    } 
+
+
+     /**
+     * @see UserManager::getLisTinTrash()
+     */
+    public function getTrashList($start = -1, $limit = -1)
+    {
+
+        $sql = 'SELECT id, familyName, firstName, email, password, status, trash, dateCreated
+        FROM users
+        WHERE trash = \'oui\'
+        ORDER BY familyName ASC';
+        //Check if the given param are int
+        if ($start != -1 || $limit != -1)
+        {
+            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
+        }
+
+        $request = $this->dao->query($sql);
+        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
+        
+        $usersList = $request->fetchAll();
+        
+
+        // Use foreach to give instance of DateTime as created date and modified date.
+        foreach ($usersList as $user)
+        {
             $user->setDateCreated(new \DateTime($user->dateCreated()));
         }
 

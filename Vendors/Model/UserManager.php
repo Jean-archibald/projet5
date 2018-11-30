@@ -20,6 +20,12 @@ abstract class UserManager extends Manager
     abstract public function count();
 
     /**
+    * Method to tell the total number of user in Trash
+    * @return int
+    */
+    abstract public function countTrash();
+
+    /**
      * Method to delete a user
      * @param $id int Identification of the user to delete
      * @return void
@@ -75,6 +81,14 @@ abstract class UserManager extends Manager
      * @return array The list of the users, Each entrance is an instance of User.
      */
     abstract public function getList($start ,$limit );
+
+     /**
+     * Method return a list of all users
+     * @param $start int the first member
+     * @param $limit int The last member
+     * @return array The list of the users, Each entrance is an instance of User.
+     */
+    abstract public function getTrashList($start = -1,$limit = -1);
     
 
 }

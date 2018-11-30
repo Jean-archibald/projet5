@@ -17,7 +17,7 @@
             <li><a href="modifier-article" class="smoothscroll">Modifier articles</a></li>
             <li><a href="ajouter-abonne" class="smoothscroll">Ajouter Abonné</a></li>
             <li><a href="liste-abonne-1" class="smoothscroll">Liste Abonnés</a></li>
-            <li><a href="corbeille" class="smoothscroll">Corbeille</a></li>
+            <li><a href="corbeille-0" class="smoothscroll">Corbeille</a></li>
             <li><a href="customizer" class="smoothscroll">Customizer</a></li>
         </ul>
       </div>
