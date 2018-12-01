@@ -11,7 +11,7 @@ if (isset($_POST['familyName']))
 
     $userToModify->setFamilyName(htmlspecialchars($_POST['familyName']));
     $userToModify->setFirstName(htmlspecialchars($_POST['firstName']));
-    $userToModify->setPassword(htmlspecialchars($_POST['password']));
+    $userToModify->setPassword(sha1($_POST['password']));
     $userToModify->setEmail(htmlspecialchars($_POST['email']));   
     $userToModify->setStatus(htmlspecialchars($_POST['status']));  
     $userToModify->setTrash(htmlspecialchars($_POST['trash']));  
@@ -21,7 +21,14 @@ if (isset($_POST['familyName']))
         $user->setId($_POST['id']);
     }
 
-    if($userToModify->isValid() && (htmlspecialchars($_POST['password']) == htmlspecialchars($_POST['password2'])))
+    if($userToModify->isValid() 
+    && (sha1($_POST['password']) == sha1($_POST['password2']))
+     && (!empty(sha1($_POST['password'])) && !empty(sha1($_POST['password2'])))
+      && (htmlspecialchars($_POST['email']) == htmlspecialchars($_POST['email2']))
+       && (!empty(htmlspecialchars($_POST['email'])) && !empty(htmlspecialchars($_POST['email2'])))
+       && (!empty(htmlspecialchars($_POST['familyName'])) && !empty(htmlspecialchars($_POST['firstName'])))
+       && (strlen(htmlspecialchars($_POST['familyName'])) <= 255)
+        && (strlen(htmlspecialchars($_POST['firstName'])) <= 255))
     {
         $userManager->save($userToModify);
 
@@ -30,83 +37,128 @@ if (isset($_POST['familyName']))
 
     if (htmlspecialchars($_POST['password']) != htmlspecialchars($_POST['password2']))
     {
-        $message = '<p class="messageProbleme">Les mots de passe doivent etre identique !<p/>';
+        $message = '<p class="messageProbleme">Les mots de passe doivent etre identiques !<p/>';
     }
 
+    if (strlen(htmlspecialchars($_POST['familyName'])) > 255)
+    {
+        $message = '<p class="messageProbleme">Le nom de famille ne doit pas dépasser 255 caractères !<p/>';
+    }
+
+    if (strlen(htmlspecialchars($_POST['firstName'])) > 255)
+    {
+        $message = '<p class="messageProbleme">Le prénom ne doit pas dépasser 255 caractères!<p/>';
+    }
+
+    if (htmlspecialchars($_POST['email']) != htmlspecialchars($_POST['email2']))
+    {
+        $message = '<p class="messageProbleme">Les emails doivent etre identiques !<p/>';
+    }
     else
     {
         $errors = $userToModify->errors();
     }
 }
 ?>
-
-<form action="<?=$url?>" method="post">
-    <p>
-        <?php
-            if (isset($message))
-            {
-                echo $message, '<br />';
-            }
-        ?>
-        
+<div align="center">
+    <form action="<?=$url?>" method="post">
         <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_FAMILYNAME, $errors))
-        echo '<p class="messageProbleme">Il manque le nom de famille.<p/>'; ?>
-        <label for="familyName">Nom</label> : 
-        <input type="text" name="familyName" id="familyName" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->familyName()); ?>"/>
-        </p>
-        <br/>
-        
-        <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_FIRSTNAME, $errors))
-        echo '<p class="messageProbleme">Il manque le prénom.<p/>'; ?>
-        <label for="firstName">Prenom</label> : 
-        <input type="text" name="firstName" id="firstName" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->firstName());?>"/>
-        </p>
-        <br/>
+            <?php
+                if (isset($message))
+                {
+                    echo $message, '<br />';
+                }
+            ?>
+            <table>
+                <tr>
+                    <td align="right">
+                        <label for="familyName">Nom</label> :
+                    </td>
+                    <td>
+                        <input type="text" name="familyName" id="familyName" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->familyName());?>"/>
+                    </td>
+                </tr> 
+                <?php if (isset($errors) && in_array(\Entity\User::INVALID_FAMILYNAME, $errors))
+                        echo '<p class="messageProbleme">Il manque le nom de famille.<p/>'; ?>   
 
-        <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_PASSWORD, $errors))
-        echo '<p class="messageProbleme">Il manque le mot de passe.<p/>'; ?>
-        <label for="password">Mot de passe</label> :   
-        <input type="text" id="password" name="password" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->password());?>"/>
-        </p>
-        <br/>
+                <tr>
+                    <td align="right">
+                        <label for="firstName">Prenom</label> : 
+                    </td>
+                    <td>
+                        <input type="text" name="firstName" id="firstName" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->firstName());?>"/>
+                    </td>
+                </tr>
+                <?php if (isset($errors) && in_array(\Entity\User::INVALID_FIRSTNAME, $errors))
+                        echo '<p class="messageProbleme">Il manque le prénom.<p/>'; ?>
 
-        <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_PASSWORD, $errors))
-        echo '<p class="messageProbleme">Il manque la confirmation du mot de passe.<p/>'; ?>
-        <label for="password2">Confirmer Mot de passe</label> :   
-        <input type="text" id="password2" name="password2" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->password())?>"/>
-        </p>
-        <br/>
+                <tr>
+                    <td align="right">
+                        <label for="password">Mot de passe</label> :  
+                    </td>
+                    <td>
+                        <input type="text" id="password" name="password" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->password());?>"/>
+                    </td>
+                </tr>
+                <?php if (isset($errors) && in_array(\Entity\User::INVALID_PASSWORD, $errors))
+                        echo '<p class="messageProbleme">Il manque le mot de passe.<p/>'; ?>   
 
-        <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_EMAIL, $errors))
-        echo '<p class="messageProbleme">Il manque le mail.<p/>'; ?>
-        <label for="email">Email</label> :   
-        <input type="email" id="email" name="email" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->email())?>"/>
-        </p>
-        <br/>
+                <tr>            
+                    <td align="right">
+                        <label for="password2">Confirmer Mot de passe</label> : 
+                    </td>
+                    <td>
+                        <input type="text" id="password2" name="password2" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->password())?>"/>
+                    </td>
+                </tr>
 
-        <p style="font-weight:bold;">statut : 
-        <input type="radio" name="status" id="status" value="administrateur"/>
-        <label for="administateur" style="font-weight:normal;">administateur</label>
-        <input type="radio" name="status" id="status" value="utilisateur" checked/>
-        <label for="utilisateur" style="font-weight:normal;">utilisateur</label>
-        </p>
-        <br/>
+                <tr>            
+                    <td align="right">
+                        <label for="email">Email</label> :   
+                    </td>
+                    <td>
+                        <input type="email" id="email" name="email" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->email())?>"/>
+                    </td>
+                </tr>
+                <?php if (isset($errors) && in_array(\Entity\User::INVALID_EMAIL, $errors))
+                        echo '<p class="messageProbleme">Il manque le mail.<p/>'; ?>
 
-        <p style="font-weight:bold;">Placer dans la corbeille ?: 
-        <input type="radio" name="trash" id="trash" value="oui"/>
-        <label for="oui" style="font-weight:normal;">oui</label>
-        <input type="radio" name="trash" id="trash" value="non" checked/>
-        <label for="non" style="font-weight:normal;">non</label>
-        </p>
-        
+                <tr>
+                    <td align="right">
+                        <label for="email">Confirmer Email</label> :  
+                    </td>
+                    <td>
+                        <input type="email" id="email2" name="email2" value="<?php if (isset($userToModify)) echo htmlspecialchars($userToModify->email())?>"/>
+                    </td>
+                </tr>       
+
+                <tr>    
+                    <td align="right">statut :
+                    </td>
+                    <td> 
+                        <input type="radio" name="status" id="status" value="administrateur"/>
+                        <label for="administateur" style="font-weight:normal;">administateur</label>
+                        <input type="radio" name="status" id="status" value="utilisateur" checked/>
+                        <label for="utilisateur" style="font-weight:normal;">utilisateur</label>
+                    </td>
+                </tr>    
+
+                <tr>            
+                    <td align="right">Placer dans la corbeille ?:
+                    </td>
+                    <td> 
+                        <input type="radio" name="trash" id="trash" value="oui"/>
+                        <label for="oui" style="font-weight:normal;">oui</label>
+                        <input type="radio" name="trash" id="trash" value="non" checked/>
+                        <label for="non" style="font-weight:normal;">non</label>
+                    </td>
+                </tr> 
+            </table>
+               <br/><br/>     
         <input type="submit" value="Modifier les infos de l'abonné"/>
-    </p>
-</form>
+                       
+    </form>
+</div>
 
 
 <?php 

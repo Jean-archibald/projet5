@@ -24,6 +24,32 @@ class UserManagerPDO extends UserManager
         $request->execute();
     }
 
+     /**
+     * @see UserManager::mailExist()
+     */
+    public function mailExist($email)
+    {
+        $request = $this->dao->prepare('SELECT * FROM users WHERE email = ?');
+        $request->execute(array($email));
+        $mailExist = $request->rowCount();
+
+        return $mailExist;
+    }
+
+     /**
+     * @see UserManager:userExist()
+     */
+    public function userExist($email,$password)
+    {
+        $request = $this->dao->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
+        $request->execute(array($email, $password));
+        $userExist = $request->rowCount();
+
+        return $userExist;
+    }
+
+
+
     /**
      * @see UserManager::count()
      */
@@ -31,6 +57,8 @@ class UserManagerPDO extends UserManager
     {
         return $this->dao->query('SELECT COUNT(*) FROM users')->fetchColumn();
     }
+
+   
 
      /**
      * @see UserManager::count()
@@ -51,11 +79,11 @@ class UserManagerPDO extends UserManager
     /**
     * @see UserManager::confirm()
     */
-    public function getUserByFamilyName($familyName)
+    public function getUserByEmail($email)
     {
         $request = $this->dao->prepare('SELECT id, familyName, firstName, email, password
-        FROM users WHERE familyName = :familyName');
-        $request->bindValue(':familyName', $familyName);
+        FROM users WHERE email = :email');
+        $request->bindValue(':email', $email);
         $request->execute();
 
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
@@ -82,18 +110,7 @@ class UserManagerPDO extends UserManager
         return $user;
     }
 
-    public function confirmName($name)
-    {
-        $request = $this->dao->prepare('SELECT id, name, password
-        FROM users WHERE name = :name');
-
-    }
-
-    public function confirmPassword($password)
-    {
-        $request = $this->dao->prepare('SELECT id, name, password
-        FROM users WHERE password = :password');
-    }
+ 
 
      /**
     * @see UserManager::save()

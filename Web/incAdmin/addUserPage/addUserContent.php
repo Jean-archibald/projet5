@@ -1,9 +1,7 @@
 <section id="addUser">
     <div>
-        <div>
         <p><?= $addUserContentTemplate ?></p>
-        </div>
-    </div>
+    </div>    
 </section>
 
 

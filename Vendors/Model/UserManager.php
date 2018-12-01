@@ -20,6 +20,18 @@ abstract class UserManager extends Manager
     abstract public function count();
 
     /**
+    * Method to tell if the mail already exist
+    * @return int
+    */
+    abstract public function mailExist($email);
+
+    /**
+    * Method to tell if the mail already exist
+    * @return int
+    */
+    abstract public function userExist($email,$password);
+
+    /**
     * Method to tell the total number of user in Trash
     * @return int
     */
@@ -33,10 +45,10 @@ abstract class UserManager extends Manager
     abstract public function delete($id);
 
     /**
-    * Method to get a user by his family Name
+    * Method to get a user by his Email
     * @return bool
     */
-    abstract public function getUserByFamilyName($familyName);
+    abstract public function getUserByEmail($email);
 
     /**
     * Method to get a user by his id
@@ -44,19 +56,6 @@ abstract class UserManager extends Manager
     */
     abstract public function getUserById($id);
 
-   
-
-    /**
-    * Method to confirm password and name of user
-    * @return bool
-    */
-    abstract public function confirmName($name);
-
-    /**
-    * Method to confirm password and name of user
-    * @return bool
-    */
-    abstract public function confirmPassword($password);
 
     /**
      * Method to save a User

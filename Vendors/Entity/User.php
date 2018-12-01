@@ -31,6 +31,15 @@ class User extends Entity
         return !(empty($this->familyName) || empty($this->firstName) || empty($this->email) || empty($this->password));
     }
 
+    /**
+     * Method useful to know if the user is valid to c
+     * @return bool
+     */
+    public function isValidToConnect()
+    {
+        return !(empty($this->email) || empty($this->password));
+    }
+
     
     // SETTERS //
     public function setFamilyName($familyName)

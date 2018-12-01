@@ -1,47 +1,36 @@
 <?php
+session_start();
+
 $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $userManager = new \Model\UserManagerPDO($dao);
 
 ob_start();
-$valueFamilyname = "";
-$valueFirstname = "";
-$valuePassword = "";
 
-if (isset($_POST['familyName']))
-{
-    $valueTitle = htmlspecialchars($_POST['familyName']);
-}
-
-if(isset($_POST['firstName']))
-{
-    $valueTitle = htmlspecialchars($_POST['firstName']);
-}
-
-if(isset($_POST['password']))
-{
-    $valueContent = htmlspecialchars($_POST['password']);
-}
-
-
-if (isset($_POST['familyName']))
-{
-    $user = $userManager->getUserByFamilyName($_POST['familyName']);;
-    
-    if (!(empty($_POST['familyName']) || empty($_POST['password']) || empty($_POST['firstName'])))
+if(isset($_POST['email']))
+{  
+    $password = htmlspecialchars($_POST['password']);
+    $email = htmlspecialchars($_POST['email']);
+    $userExist = $userManager->userExist($email,$password);
+    var_dump($userExist);
+    if(!empty($password) AND !empty($email))
     {
-        if(($user->familyName() == htmlspecialchars($_POST['familyName'])) && ($user->firstName() == htmlspecialchars($_POST['firstName'])) && ($user->password() == htmlspecialchars($_POST['password'])))
+        if($userExist == 2)
         {
-            require __DIR__.'/../../View/Frontend/homeView.php';
+           $userInfos = $userManager->getUserByEmail($email);
+           $_SESSION['id'] = $userInfos['id'];
+           $_SESSION['familyName'] = $userInfos['familyName'];
+           $_SESSION['firstName'] = $userInfos['firstName'];
+           $_SESSION['email'] = $userInfos['email'];
+           header('Location: accueil');
         }
         else
         {
-            $message = 'Vous devez etre membre';
+            $message = '<p class="messageProbleme">L\'adresse mail n\'est pas répertorié ou le mot de passe est invalide !<p/>';
         }
     }
-
-    else if(empty($_POST['familyName']) || empty($_POST['password']) || empty($_POST['firstName']))
+    else
     {
-        $errors = $user->errors();
+        $message = '<p class="messageProbleme">Tous les champs doivent être complétés !<p/>';
     }
 }
 
@@ -55,31 +44,33 @@ if (isset($_POST['familyName']))
                 echo $message, '<br />';
             }
         ?>
+    </p>
+
+    <table>
+
+        <tr>
+            <td align="right">
+                <label for="email">Email</label> :   
+            </td>
+            <td>
+                <input type="email" id="email" name="email" placeholder="Votre email" />
+            </td>
+        </tr>
         
-        <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_FAMILYNAME, $errors))
-        echo '<p class="messageProbleme">Veuillez inscrire votre nom.<p/>'; ?>
-        <label for="familyName">Nom de Famille</label> : 
-        <input type="text" name="familyName" id="familyName" value="<?=htmlspecialchars($valueFamilyname)?>"/>
-        </p>
+        <tr>
+            <td align="right">
+                <label for="password">Mot de passe</label> :   
+            </td>
+            <td>
+                <input id="text" name="password" id="password" placeholder="Votre mot de passe" />
+            </td>
+        </tr>
 
-         <p>
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_FIRSTNAME, $errors))
-        echo '<p class="messageProbleme">Veuillez inscrire votre nom.<p/>'; ?>
-        <label for="firstName">Prénom</label> : 
-        <input type="text" name="firstName" id="firstName" value="<?=htmlspecialchars($valueFirstname)?>"/>
-        </p>
+    </table>
+    <br/><br/>    
 
+    <input type="submit" value="Se connecter" />
         
-  
-        <?php if (isset($errors) && in_array(\Entity\User::INVALID_PASSWORD, $errors))
-        echo '<p class="messageProbleme">Veuillez inscrire votre password.<p/>'; ?>
-        <label for="password">Mot de passe</label> :   
-        <input id="text" name="password" id="password" value="<?=htmlspecialchars($valuePassword)?>"/>
-        <br/>
-
-        <input type="submit" value="Se connecter"/>
-        </p>
 </form>
 
 <?php 
