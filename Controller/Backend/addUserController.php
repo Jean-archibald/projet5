@@ -1,4 +1,5 @@
 <?php
+
 $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $userManager = new \Model\UserManagerPDO($dao);
 

@@ -15,9 +15,20 @@ include('Web/inc/medecineGeneralePage/navMedGen.php');
 
 <!-- Header -->
 <?php
+/*
 include('Web/inc/medecineGeneralePage/headerMedecineGenerale.php'); 
+*/
 ?>
 
+<!-- Titre -->
+<?php
+include('Web/inc/allPages/title.php'); 
+?>
+
+<!-- Content From Controller-->
+<?php
+    include('Web/inc/allPages/listNewsContent.php');
+?>
 
 
 

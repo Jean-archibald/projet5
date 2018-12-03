@@ -10,10 +10,11 @@ class NewsManagerPDO extends NewsManager
      */
     protected function add(News $news)
     {
-        $request = $this->dao->prepare('INSERT INTO news(title, content, publish, trash, dateCreated, dateModified) 
-        VALUES(:title, :content, :publish, :trash, NOW(), NOW())');
+        $request = $this->dao->prepare('INSERT INTO news(title, category, content, publish, trash, dateCreated, dateModified) 
+        VALUES(:title, :category, :content, :publish, :trash, NOW(), NOW())');
 
         $request->bindValue(':title', $news->title());
+        $request->bindValue(':category', $news->category());
         $request->bindValue(':content', $news->content());
         $request->bindValue(':publish', $news->publish());
         $request->bindValue(':trash', 'non');
@@ -58,11 +59,11 @@ class NewsManagerPDO extends NewsManager
     /**
      * @see NewsManager::getListPublish()
      */
-    public function getListPublish($start = -1, $limit = -1)
+    public function getListPublishByCategory($start = -1, $limit = -1, $category)
     {
-        $sql = 'SELECT id, title, content, publish, dateCreated, dateModified 
+        $sql = 'SELECT id, title, category, content, publish, dateCreated, dateModified 
         FROM news
-        WHERE publish = \'oui\'
+        WHERE publish = \'oui\' AND category = ?
         ORDER BY id DESC';
 
         //Check if the given param are int
@@ -71,8 +72,9 @@ class NewsManagerPDO extends NewsManager
             $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
         }
 
-        $request = $this->dao->query($sql);
-        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Chapter');
+        $request = $this->dao->prepare($sql);
+        $request->execute(array($category));
+        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
         
         $newsList = $request->fetchAll();
         
@@ -87,7 +89,7 @@ class NewsManagerPDO extends NewsManager
 
         $request->closeCursor();
 
-        return $chaptersList;
+        return $newsList;
     } 
 
     /**
@@ -95,7 +97,7 @@ class NewsManagerPDO extends NewsManager
      */
     public function getListToModify($start = -1, $limit = -1)
     {
-        $sql = 'SELECT id, title, content, publish, trash, dateCreated, dateModified 
+        $sql = 'SELECT id, title, category, content, publish, trash, dateCreated, dateModified 
         FROM news
         WHERE trash = \'non\'
         ORDER BY id DESC';
@@ -142,7 +144,7 @@ class NewsManagerPDO extends NewsManager
         }
 
         $request = $this->dao->query($sql);
-        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Chapter');
+        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
         
         $chaptersList = $request->fetchAll();
         
@@ -165,7 +167,7 @@ class NewsManagerPDO extends NewsManager
      */
     public function getUnique($id)
     {
-        $request = $this->dao->prepare('SELECT id, title, content, publish, trash, dateCreated, dateModified 
+        $request = $this->dao->prepare('SELECT id, title, category, content, publish, trash, dateCreated, dateModified 
         FROM news WHERE id = :id');
         $request->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $request->execute();

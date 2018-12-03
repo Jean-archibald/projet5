@@ -1,4 +1,5 @@
 <?php
+
 $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $userManager = new \Model\UserManagerPDO($dao);
 
@@ -11,7 +12,7 @@ if (isset($_POST['familyName']))
 
     $userToModify->setFamilyName(htmlspecialchars($_POST['familyName']));
     $userToModify->setFirstName(htmlspecialchars($_POST['firstName']));
-    $userToModify->setPassword(sha1($_POST['password']));
+    $userToModify->setPassword(htmlspecialchars($_POST['password']));
     $userToModify->setEmail(htmlspecialchars($_POST['email']));   
     $userToModify->setStatus(htmlspecialchars($_POST['status']));  
     $userToModify->setTrash(htmlspecialchars($_POST['trash']));  
@@ -22,8 +23,8 @@ if (isset($_POST['familyName']))
     }
 
     if($userToModify->isValid() 
-    && (sha1($_POST['password']) == sha1($_POST['password2']))
-     && (!empty(sha1($_POST['password'])) && !empty(sha1($_POST['password2'])))
+    && (htmlspecialchars($_POST['password']) == htmlspecialchars($_POST['password2']))
+     && (!empty(htmlspecialchars($_POST['password'])) && !empty(htmlspecialchars($_POST['password2'])))
       && (htmlspecialchars($_POST['email']) == htmlspecialchars($_POST['email2']))
        && (!empty(htmlspecialchars($_POST['email'])) && !empty(htmlspecialchars($_POST['email2'])))
        && (!empty(htmlspecialchars($_POST['familyName'])) && !empty(htmlspecialchars($_POST['firstName'])))

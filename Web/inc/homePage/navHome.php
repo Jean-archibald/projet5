@@ -17,6 +17,15 @@
           <li><a href="nutrition" class="smoothscroll">Nutrition</a></li>
           <li><a href="allergologie" class="smoothscroll">Allergologie</a></li>
           <li><a href="divers" class="smoothscroll">Divers</a></li>
+          <li><a href="sessiondestroy" class="smoothscroll">Se deconnecter</a></li>
+          <?php
+            if (isset($_SESSION['status']) && ($_SESSION['status']) == 'administrateur')
+            {
+          ?>
+          <li><a href="admin" class="smoothscroll">Administration</a></li> 
+          <?php
+            }
+          ?>
         </ul>
       </div>
       <!--/.nav-collapse -->

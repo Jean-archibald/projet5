@@ -335,7 +335,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* Ajout Perso */
+/* Message Style */
 
 .messageProbleme
 {
@@ -358,7 +358,22 @@ text-align:center;
   text-align:center;
 }
 
-/*General Admin */
+.messageInfo
+{
+   text-align: center;
+   color:#1abc9c;
+   font-size:1.2em;
+}
+
+/*General Admin Et public*/
+#titlePublicSection
+{
+  background-color: rgb(95, 89, 89);
+  min-height: 300px;
+  text-align: center;
+  padding-top: 51px;
+}
+
 
 #titleAdminSection
 {
@@ -367,15 +382,31 @@ text-align:center;
   text-align: center;
 }
 
+
+
 .divTitle
 {
   position: relative;
   top:100px;
 }
 
+.divTitlePublic
+{
+  position: relative;
+  top:50px;
+}
+
 .titleAdmin
 {
- font-size: 4em;
+  font-size: 4em;
+}
+
+.titlePublic
+{
+  color: #1abc9c;
+  font-size: 4em;
+  text-align: center;
+ 
 }
 
 /* User */
@@ -422,6 +453,11 @@ td
   border-color: #1abc9c;
 }
 
+#buttonUnauthoPage
+{
+ color : red;
+}
+
 
 .paginationListUsers
 {
@@ -449,4 +485,19 @@ td
   border-width : 5px;
   border-style: solid;
   border-color: darkred;
+}
+
+.uniqueNewsTitle
+{
+    color:#64a19d;
+    text-align:center;
+    padding-bottom:20px;
+    font-size:2em;
+}
+
+.uniqueNewsContent
+{
+    padding-left : 20px;
+    padding-right : 20px;
+    text-align:justify;
 }

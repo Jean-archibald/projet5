@@ -1,5 +1,4 @@
 <?php
-
 require __DIR__.'/Web/Bootstrap.php';
 $url = '';
 if (isset($_GET['url']))
@@ -11,37 +10,60 @@ if (isset($_GET['url']))
 
 if($url == '')
 {
-    require __DIR__.'/Controller/Frontend/connexion.php';
+    require __DIR__.'/Controller/Frontend/connexionController.php';
+
 }
 
 elseif(preg_match('#accueil#', $url , $params))
 {
     $title = 'Accueil';
-    require __DIR__.'/View/Frontend/homeView.php';
+    $direction = 'home';
+    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
 }
 
 elseif(preg_match('#medecinegenerale#', $url , $params))
 {
     $title = 'Medecine Generale';
-    require __DIR__.'/View/Frontend/medecineGeneraleView.php';
+    $direction = 'listNews';
+    $category = 'medecine generale';
+    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
 }
 
 elseif(preg_match('#nutrition#', $url , $params))
 {
     $title = 'Nutrition';
-    require __DIR__.'/View/Frontend/nutritionView.php';
+    $direction = 'listNews';
+    $category = 'nutrition';
+    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
 }
 
 elseif(preg_match('#allergologie#', $url , $params))
 {
     $title = 'Allergologie';
-    require __DIR__.'/View/Frontend/allergologieView.php';
+    $direction = 'listNews';
+    $category = 'allergologie';
+    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
 }
 
 elseif(preg_match('#divers#', $url , $params))
 {
     $title = 'Divers';
-    require __DIR__.'/View/Frontend/diversView.php';
+    $direction = 'listNews';
+    $category = 'divers';
+    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+}
+
+elseif(preg_match('#article-([0-9]+)#', $url , $params))
+{
+    $id = $params[1];
+    $direction = 'uniqueNews';
+    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+}
+
+elseif(preg_match('#sessiondestroy#', $url , $params))
+{
+
+    require __DIR__.'/Controller/Frontend/deconnexionController.php';
 }
 
 
@@ -51,57 +73,73 @@ elseif(preg_match('#divers#', $url , $params))
 elseif(preg_match('#admin#', $url , $params))
 {
     $title = 'Administration';
-    require __DIR__.'/View/Backend/adminHomeView.php';
+    $direction = 'adminHome';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#creer#', $url , $params))
 {
     $title = 'Creation';
-    require __DIR__.'/View/Backend/adminHomeView.php';
+    $direction = 'writeNews';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#modifier#', $url , $params))
 {
     $title = 'Modification';
-    require __DIR__.'/View/Backend/adminHomeView.php';
+    $direction = 'modifNews';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
+elseif(preg_match('#modification-([0-9]+)#', $url , $params))
+{
+    $id = $params[1];
+    $direction = 'modifyingUniqueNews';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#ajouter#', $url , $params))
 {
     $title = 'Ajouter un abonné';
-    require __DIR__.'/Controller/Backend/addUserController.php';
+    $direction = 'addUser';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#liste-abonne-([0-9]+)#', $url , $params))
 {
     $title = 'Liste des abonnés';
     $id = $params[1];
-    require __DIR__.'/Controller/Backend/listUsersController.php';
+    $direction = 'listUsers';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#abonne-([0-9]+)#', $url , $params))
 {
     $title = 'Modifié abonné';
     $id = $params[1];
-    require __DIR__.'/Controller/Backend/modifyUserController.php';
+    $direction = 'modifyUser';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#corbeille-([0-9]+)#', $url , $params))
 {
     $title = 'Corbeille';
     $id = $params[1];
-    require __DIR__.'/Controller/Backend/trashController.php';
+    $direction = 'trash';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#utilisateur-supprimer-([0-9]+)#', $url , $params))
 {
     
     $id = $params[1];
-    require __DIR__.'/Controller/Backend/deleteUserController.php';
+    $direction = 'deleteUser';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
 elseif(preg_match('#customizer#', $url , $params))
 {
     $title = 'Customization du site';
-    require __DIR__.'/View/Backend/adminHomeView.php';
+    $direction = 'adminHome';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }

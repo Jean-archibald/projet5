@@ -15,15 +15,20 @@ include('Web/inc/nutritionPage/navNutrition.php');
 
 <!-- Header -->
 <?php
+/*
 include('Web/inc/nutritionPage/nutritionHeader.php'); 
+*/
 ?>
 
-<!-- Content -->
+<!-- Titre -->
 <?php
-include('Web/inc/nutritionPage/nutritionContent.php'); 
+include('Web/inc/allPages/title.php'); 
 ?>
 
-
+<!-- Content From Controller-->
+<?php
+    include('Web/inc/allPages/listNewsContent.php');
+?>
 
 
 <!-- Social -->

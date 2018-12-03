@@ -12,10 +12,21 @@ include('Web/inc/allPages/head.php');
 <?php
 include('Web/inc/allergologiePage/navAllergologie.php'); 
 ?>
-
 <!-- Header -->
+ <?php 
+/*
+include('Web/inc/allergologiePage/allergologieHeader.php');  
+*/
+?>
+
+<!-- Titre -->
 <?php
-include('Web/inc/allergologiePage/allergologieHeader.php'); 
+include('Web/inc/allPages/title.php'); 
+?>
+
+<!-- Content From Controller-->
+<?php
+    include('Web/inc/allPages/listNewsContent.php');
 ?>
 
 

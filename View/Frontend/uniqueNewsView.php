@@ -10,13 +10,13 @@ include('Web/inc/allPages/head.php');
 
 <!-- Navigation -->
 <?php
-include('Web/inc/diversPage/navDivers.php'); 
+include('Web/inc/medecineGeneralePage/navMedGen.php'); 
 ?>
 
 <!-- Header -->
 <?php
 /*
-include('Web/inc/allergologiePage/allergologieHeader.php'); 
+include('Web/inc/medecineGeneralePage/headerMedecineGenerale.php'); 
 */
 ?>
 
@@ -27,7 +27,7 @@ include('Web/inc/allPages/title.php');
 
 <!-- Content From Controller-->
 <?php
-    include('Web/inc/allPages/listNewsContent.php');
+    include('Web/inc/uniqueNewsPage/uniqueNewsContent.php');
 ?>
 
 

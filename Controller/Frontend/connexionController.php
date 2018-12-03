@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $userManager = new \Model\UserManagerPDO($dao);
@@ -11,16 +11,18 @@ if(isset($_POST['email']))
     $password = htmlspecialchars($_POST['password']);
     $email = htmlspecialchars($_POST['email']);
     $userExist = $userManager->userExist($email,$password);
-    var_dump($userExist);
+    
     if(!empty($password) AND !empty($email))
     {
-        if($userExist == 2)
+        if($userExist == 1)
         {
            $userInfos = $userManager->getUserByEmail($email);
            $_SESSION['id'] = $userInfos['id'];
            $_SESSION['familyName'] = $userInfos['familyName'];
            $_SESSION['firstName'] = $userInfos['firstName'];
            $_SESSION['email'] = $userInfos['email'];
+           $_SESSION['password'] = $userInfos['password'];
+           $_SESSION['status'] = $userInfos['status'];
            header('Location: accueil');
         }
         else
@@ -74,6 +76,6 @@ if(isset($_POST['email']))
 </form>
 
 <?php 
-$contentTemplate = ob_get_clean();
+$userConnectContentTemplate = ob_get_clean();
 require __DIR__.'/../../View/Frontend/connexionView.php';
 ?>

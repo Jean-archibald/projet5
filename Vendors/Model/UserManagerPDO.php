@@ -81,7 +81,7 @@ class UserManagerPDO extends UserManager
     */
     public function getUserByEmail($email)
     {
-        $request = $this->dao->prepare('SELECT id, familyName, firstName, email, password
+        $request = $this->dao->prepare('SELECT id, familyName, firstName, email, password, status
         FROM users WHERE email = :email');
         $request->bindValue(':email', $email);
         $request->execute();

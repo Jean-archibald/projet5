@@ -44,7 +44,7 @@ abstract class NewsManager extends Manager
      * @param $limit int The number of chapter to select
      * @return array The list of the chapters, Each entrance is an instance of Chapter.
      */
-    abstract public function getListPublish($start ,$limit );
+    abstract public function getListPublishByCategory($start ,$limit ,$category );
 
      /**
      * Method return a list of asked chapters
@@ -77,7 +77,7 @@ abstract class NewsManager extends Manager
      * @see self::modify()
      * @return void
      */
-    abstract protected function save(Chapter $chapter);
+    abstract protected function save(News $news);
     
     
 
@@ -86,7 +86,7 @@ abstract class NewsManager extends Manager
      * @param $chapter chapter the chapter to modify
      * @return void
      */
-    abstract protected function modify(Chapter $chapter);
+    abstract protected function modify(News $news);
 
 
 }

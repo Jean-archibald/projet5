@@ -1,6 +1,8 @@
 <div class="container">
     <div class="row centered mt mb">
-      <div class="col-lg-8 col-lg-offset-2">
+      
+      <div class="col-lg-10 col-lg-offset-2">
+      <h1>Bienvenue <?=$_SESSION['firstName'] . ' ' . $_SESSION['familyName']?></h1>
         <p>Bienvenue sur le site destiné à reprendre les informations délivrées en consultation et à les compléter.</p>
         <p>Ces informations sont les réponses aux questions posées par les personnes venues me consulter : elles sont un peu plus détaillées. </p>
         <p>Le site se construit au fur et à mesure des besoins portés à ma connaissance.</p>
