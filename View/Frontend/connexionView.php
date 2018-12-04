@@ -8,10 +8,15 @@ include('Web/inc/allPages/head.php');
 
 <body>
 
-
+<!-- Connexion -->
 <?php
 include('Web/inc/connexionPage/contentConnexion.php');
 ?>
+
+<!-- Copyright -->
+<?php
+    include('Web/inc/allPages/copyright.php'); 
+    ?>
 
 
 <!-- Script -->

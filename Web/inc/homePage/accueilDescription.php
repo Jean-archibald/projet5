@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row centered mt mb">
       
-      <div class="col-lg-10 col-lg-offset-2">
+      <div class="descriptonBienvenue">
       <h1>Bienvenue <?=$_SESSION['firstName'] . ' ' . $_SESSION['familyName']?></h1>
         <p>Bienvenue sur le site destiné à reprendre les informations délivrées en consultation et à les compléter.</p>
         <p>Ces informations sont les réponses aux questions posées par les personnes venues me consulter : elles sont un peu plus détaillées. </p>
@@ -13,10 +13,10 @@
         </p>
         <p>Plusieurs  rubriques se complètent et se chevauchent dans lesquelles les documents sont classés par ordre chronologique de leur conception : 
         <ul id="listeHome" style="list-style: none;">
-            <li>allergologie</li>
-            <li>nutrition</li>
-            <li>médecine générale</li>
-            <li>divers</li>
+            <li>- allergologie</li>
+            <li>- nutrition</li>
+            <li>- médecine générale</li>
+            <li>- divers</li>
         </ul>
         </p>
         <br/><br/>

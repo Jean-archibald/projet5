@@ -56,7 +56,7 @@ if (isset($_POST['title']))
 }
 ?>
 
-<form action="creer-article" method="post">
+<form action="creer-article" method="post"  enctype="multipart/form-data" class="writeForm">
     <p>
         <?php
             if (isset($message))
@@ -72,11 +72,33 @@ if (isset($_POST['title']))
             <input type="text" name="title" id="title" value="<?=$valueTitle?>"/>
         </p>
         <br/>
+
+         <p>
+            <label for="icone">Ajouter un icone à l'article : </label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="12345" />
+            <input type="file" name="icone" />
+        </p>
+        <br/>
+
+        
         
         <?php if (isset($errors) && in_array(\Entity\News::INVALID_CONTENT, $errors))
         echo '<p class="messageProbleme">Il manque le contenu.<p/>'; ?>
-        <label for="content"></label>     
+        <label for="content">Ajouter du texte : </label>     
         <textarea id="mytextarea" name="content" id="content"><?=$valueContent?></textarea>
+        <br/>
+
+        <p>
+            <label for="fileSend">Ajouter un fichier : </label>
+            <input type="file" name="fileSend" />
+        </p>
+        <br/>
+        <p>
+            <?php if (isset($errors) && in_array(\Entity\News::INVALID_TITLE, $errors))
+            echo '<p class="messageProbleme">Il manque le titre.<p/>'; ?>
+            <label for="fileName">Nom du fichier</label> : 
+            <input type="text" name="fileName" id="fileName" placeholder="Nom du fichier"/>
+        </p>
         <br/>
 
         <p>
@@ -92,14 +114,17 @@ if (isset($_POST['title']))
         </p>
         <br/>
 
-         <p>Publier l'article ?: 
+         <p><label>Publier l'article ?:</label>
             <input type="radio" name="publish" id="publish" value="oui"/>
             <label for="oui">oui</label>
             <input type="radio" name="publish" id="publish" value="non" checked/>
             <label for="non">non</label>
         </p>
+        <br/>
         
         <input type="submit" value="Enregistrer"/>
+        
+
         </p>
 </form>
 

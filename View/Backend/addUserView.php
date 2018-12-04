@@ -23,6 +23,11 @@ include('Web/incAdmin/allAdminPages/titleAdmin.php');
 include('Web/incAdmin/addUserPage/addUserContent.php');
 ?>
 
+<!-- Copyright -->
+<?php
+    include('Web/inc/allPages/copyright.php'); 
+    ?>
+
 <!-- Script -->
 <?php
 include('Web/inc/allPages/script.php'); 

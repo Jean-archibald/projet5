@@ -18,6 +18,10 @@ include('Web/incAdmin/allAdminPages/navAdmin.php');
 include('Web/incAdmin/allAdminPages/titleAdmin.php'); 
 ?>
 
+<!-- Copyright -->
+<?php
+    include('Web/inc/allPages/copyright.php'); 
+    ?>
 
 <!-- Script -->
 <?php

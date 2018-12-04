@@ -31,7 +31,7 @@ include('Web/inc/allPages/title.php');
 ?>
 
 
-<!-- Social -->
+<!-- Copyright-->
 <?php
 include('Web/inc/allPages/copyright.php'); 
 ?>

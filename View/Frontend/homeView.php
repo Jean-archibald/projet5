@@ -26,7 +26,7 @@ include('Web/inc/homePage/accueilDescription.php');
 
 
 
-<!-- Social -->
+<!-- Copyright-->
 <?php
 include('Web/inc/allPages/copyright.php'); 
 ?>

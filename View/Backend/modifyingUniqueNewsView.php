@@ -18,6 +18,11 @@
     <?php
     include('Web/incAdmin/modifyingUniqueNewsPage/modifyingUniqueNewsContent.php');
     ?>
+
+    <!-- Copyright -->
+    <?php
+    include('Web/inc/allPages/copyright.php'); 
+    ?>
     
     <!-- Script -->
     <?php

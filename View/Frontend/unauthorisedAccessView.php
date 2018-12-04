@@ -14,8 +14,10 @@
 include('Web/incAdmin/allAdminPages/titleAdmin.php'); 
 ?>
 
-
-
+<!-- Copyright -->
+<?php
+include('Web/inc/allPages/copyright.php'); 
+?>
 
 
 
