@@ -84,10 +84,11 @@ elseif(preg_match('#creer#', $url , $params))
     require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
-elseif(preg_match('#modifier#', $url , $params))
+elseif(preg_match('#liste-articles-([0-9]+)#', $url , $params))
 {
-    $title = 'Modification';
-    $direction = 'modifNews';
+    $title = 'Liste des articles';
+    $id = $params[1];
+    $direction = 'listNews';
     require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 

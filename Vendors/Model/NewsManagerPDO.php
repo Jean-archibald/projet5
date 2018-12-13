@@ -10,13 +10,15 @@ class NewsManagerPDO extends NewsManager
      */
     protected function add(News $news)
     {
-        $request = $this->dao->prepare('INSERT INTO news(title, category, content, publish, trash, dateCreated, dateModified) 
-        VALUES(:title, :category, :content, :publish, :trash, NOW(), NOW())');
+        $request = $this->dao->prepare('INSERT INTO news(title, category, content, publish, iconeName, upfileName, trash, dateCreated, dateModified) 
+        VALUES(:title, :category, :content, :publish, :iconeName, :upfileName, :trash, NOW(), NOW())');
 
         $request->bindValue(':title', $news->title());
         $request->bindValue(':category', $news->category());
         $request->bindValue(':content', $news->content());
         $request->bindValue(':publish', $news->publish());
+        $request->bindValue(':iconeName', $news->iconeName());
+        $request->bindValue(':upfileName', $news->upfileName());
         $request->bindValue(':trash', 'non');
         
 
@@ -93,14 +95,14 @@ class NewsManagerPDO extends NewsManager
     } 
 
     /**
-     * @see NewsManager::getLisToModify()
+     * @see NewsManager::getList()
      */
-    public function getListToModify($start = -1, $limit = -1)
+    public function getList($start = -1, $limit = -1)
     {
         $sql = 'SELECT id, title, category, content, publish, trash, dateCreated, dateModified 
         FROM news
         WHERE trash = \'non\'
-        ORDER BY id DESC';
+        ORDER BY category DESC';
 
         //Check if the given param are int
         if ($start != -1 || $limit != -1)
@@ -163,7 +165,7 @@ class NewsManagerPDO extends NewsManager
     } 
 
     /**
-     * @see ChapterManager::getUnique()
+     * @see NewsManager::getUnique()
      */
     public function getUnique($id)
     {

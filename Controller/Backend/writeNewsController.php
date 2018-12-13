@@ -10,6 +10,8 @@ $valueTitle = "";
 $valueContent = "";
 $valueIconeName = "";
 $valueFileName = "";
+$up_file_extension_fileSend = "";
+$up_file_extension_icone = "";
 
 if(isset($_POST['title']))
 {
@@ -33,16 +35,7 @@ if(isset($_POST['mainFileName']))
 
 if (isset($_POST['title']))
 {
-    $news = new \Entity\News(
-        [
-            'title' => $_POST['title'],
-            'content' => $_POST['content'],
-            'publish' => $_POST['publish'],
-            'category' => $_POST['category']
-        ]
-        );
 
-   
     if(isset($_FILES) && isset($_FILES['icone']))
     {       
 
@@ -50,10 +43,10 @@ if (isset($_POST['title']))
         $up_file_tmp_name_icone = $_FILES['icone']['tmp_name'];
         $up_file_type_icone = $_FILES['icone']['type'];
         $up_file_size_icone = $_FILES['icone']['size'];
-        $up_file_code_error = $_FILES['icone']['error'];
+        $up_file_code_error = $_FILES['icone']['error'];  
         $iconeNameInFile = $_POST['iconeName'];
+        $iconeNameInFile = preg_replace('/\s/', '_', $iconeNameInFile);
         
-
         switch ($up_file_code_error)
         {
             case UPLOAD_ERR_OK :
@@ -76,8 +69,6 @@ if (isset($_POST['title']))
                             if(!empty($_POST['iconeName']))
                             {
                                 $messageIconeValidated ='<p class="messageValidation">Fichier '. $iconeNameInFile . $up_file_extension_icone . ' envoyé avec succès</p>';
-
-                                $UpFileManager->add($UpFileIcone);
                             }
                             else
                             {
@@ -145,6 +136,7 @@ if (isset($_POST['title']))
         $up_file_size_fileSend = $_FILES['fileSend']['size'];
         $up_file_code_error = $_FILES['fileSend']['error'];
         $fileSendNameInFile = $_POST['mainFileName'];
+        $fileSendNameInFile = preg_replace('/\s/', '_', $fileSendNameInFile);
 
         switch ($up_file_code_error)
         {
@@ -167,10 +159,7 @@ if (isset($_POST['title']))
 
                             if(!empty($_POST['mainFileName']))
                             {
-                                
                                 $messageFileValidated ='<p class="messageValidation">Fichier ' . $fileSendNameInFile . $up_file_extension_fileSend . ' envoyé avec succès</p>';
-
-                                $UpFileManager->add($UpFileSend);
                             }
                             else
                             {
@@ -228,6 +217,18 @@ if (isset($_POST['title']))
                 $messageFile = "(erreur inconnue : " .$up_file_code_error. ")";       
         }
     }
+
+
+    $news = new \Entity\News(
+        [
+            'title' => $_POST['title'],
+            'content' => $_POST['content'],
+            'publish' => $_POST['publish'],
+            'category' => $_POST['category'],
+            'iconeName' => $iconeNameInFile.$up_file_extension_icone,
+            'upfileName' => $fileSendNameInFile.$up_file_extension_fileSend
+        ]
+        );
    
     if($news->isValid() && isset($messageIcone) && $messageIcone == "Pas d'icone saisi." && isset($messageFile) && $messageFile == "Pas de fichier principal saisi." )
     {
@@ -236,18 +237,38 @@ if (isset($_POST['title']))
     }
     elseif($news->isValid() && isset($messageIconeValidated) && isset($messageFile) && $messageFile == "Pas de fichier principal saisi." )
     {
+        $UpFileManager->add($UpFileIcone);
         $manager->save($news);
         $message = '<p class="messageValidation">L\'article a bien été ajouté, il comporte un icone !<p/>';
+        if (isset($messageIconeValidated))
+        {
+            echo $messageIconeValidated, '<br />';
+        }
     }
     elseif($news->isValid() && isset($messageFileValidated) && isset($messageIcone) && $messageIcone == "Pas d'icone saisi." )
-    {
+    {   
+        $UpFileManager->add($UpFileSend);
         $manager->save($news);
         $message = '<p class="messageValidation">L\'article a bien été ajouté, il comporte un fichier principal !<p/>';
+        if (isset($messageFileValidated))
+        {
+            echo $messageFileValidated, '<br />';
+        }
     }
     elseif($news->isValid() && isset($messageFileValidated) && isset($messageIconeValidated))
     {
+        $UpFileManager->add($UpFileSend);
+        $UpFileManager->add($UpFileIcone);
         $manager->save($news);
         $message = '<p class="messageValidation">L\'article a bien été ajouté, il comporte un icone et un fichier principal !<p/>';
+        if (isset($messageIconeValidated))
+        {
+            echo $messageIconeValidated, '<br />';
+        }
+        if (isset($messageFileValidated))
+        {
+            echo $messageFileValidated, '<br />';
+        }
     }
     elseif($news->isValid() && isset($messageIcone) && $messageIcone != "Pas d'icone saisi." && isset($messageFile) && $messageFile == "Pas de fichier principal saisi." )
     {
@@ -275,14 +296,6 @@ if (isset($_POST['title']))
             if (isset($message))
             {
                 echo $message, '<br />';
-            }
-            if (isset($messageIconeValidated))
-            {
-                echo $messageIconeValidated, '<br />';
-            }
-            if (isset($messageFileValidated))
-            {
-                echo $messageFileValidated, '<br />';
             }
             
         ?>

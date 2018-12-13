@@ -14,7 +14,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="admin" class="smoothscroll">Accueil</a></li>
             <li><a href="creer-article" class="smoothscroll">Nouvel article</a></li>
-            <li><a href="modifier-article" class="smoothscroll">Modifier articles</a></li>
+            <li><a href="liste-articles-1" class="smoothscroll">Liste articles</a></li>
             <li><a href="ajouter-abonne" class="smoothscroll">Ajouter Abonné</a></li>
             <li><a href="liste-abonne-1" class="smoothscroll">Liste Abonnés</a></li>
             <li><a href="corbeille-0" class="smoothscroll">Corbeille</a></li>

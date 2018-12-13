@@ -52,7 +52,7 @@ abstract class NewsManager extends Manager
      * @param $limit int The number of chapter to select
      * @return array The list of the chapters, Each entrance is an instance of Chapter.
      */
-    abstract public function getListToModify($start = -1,$limit = -1);
+    abstract public function getList($start = -1,$limit = -1);
 
     /**
      * Method return a list of asked chapters
@@ -65,8 +65,8 @@ abstract class NewsManager extends Manager
 
     /**
      * Metho return a specific chapter
-     * @param $id int Identification of the chapter to get
-     * @return Chapter the chapter asked
+     * @param $id int Identification of the news to get
+     * @return News the news asked
      */
     abstract public function getUnique($id);
 
