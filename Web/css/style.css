@@ -509,8 +509,17 @@ td
   font-size: 1.8em;
 }
 
+/* Page Write */
+
+
 .writeForm
 {
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.buttonWrite
+{
+  color:white;
+  background-color: #16a085;
 }

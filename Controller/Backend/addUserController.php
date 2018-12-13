@@ -39,7 +39,7 @@ if (isset($_POST['familyName']))
                 {
                     if(filter_var($email,FILTER_VALIDATE_EMAIL))
                     {
-                        if( $userManager->mailExist($email) == 0)
+                        if($userManager->mailExist($email) == 0)
                         {
                             if($user->isValid())
                             {
