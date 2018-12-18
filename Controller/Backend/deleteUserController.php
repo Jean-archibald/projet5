@@ -35,7 +35,7 @@ elseif(isset($_POST['delete']) && ($_POST['delete']) == 'non')
             {
         ?>
         <p class="infoListe">Veuillez confirmer la suppression de  <?= $userToDeleteFamilyName ?> <?= $userToDeleteFirstName ?> ? :
-        </br> 
+        <br/> 
         <input type="radio" name="delete" id="delete" value="oui"/>
         <label for="oui">oui</label>
         <input type="radio" name="delete" id="delete" value="non" checked/>

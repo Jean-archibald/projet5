@@ -13,7 +13,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="accueil">Accueil</a></li>
-          <li class="active"><a href="medecinegenerale">Medecine generale</a></li>
+          <li><a href="medecinegenerale">Medecine generale</a></li>
           <li><a href="nutrition" class="smoothscroll">Nutrition</a></li>
           <li><a href="allergologie" class="smoothscroll">Allergologie</a></li>
           <li><a href="divers" class="smoothscroll">Divers</a></li>
@@ -26,7 +26,7 @@
           <?php
             }
           ?>
-           <li><a href="rechercher-1" class="smoothscroll">Rechercher</a></li>
+           <li class="active"><a href="rechercher-1" class="smoothscroll">Rechercher</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->

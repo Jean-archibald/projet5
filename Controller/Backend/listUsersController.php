@@ -40,7 +40,7 @@ foreach ($userManager->getList($started, $usersPerPage) as $user)
     $user->trash(), '</td><td>',
     $user->dateCreated()->format('d/m/Y à H\hi'),'</td><td>
     <a href="abonne-',$user->id(), '">Modifier</a>
-    | <a href="corbeille-', $user->id(), '">Corbeille</a>
+    | <a href="utilisateur-corbeille-', $user->id(), '">Corbeille</a>
     </td></tr>', "\n";
 }
 ?>

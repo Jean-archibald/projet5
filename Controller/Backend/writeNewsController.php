@@ -3,8 +3,6 @@ $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $manager = new \Model\NewsManagerPDO($dao);
 $UpFileManager = new \Model\UpFileManagerPDO($dao);
 
-
-
 ob_start();
 $valueTitle = "";
 $valueContent = "";
@@ -12,6 +10,8 @@ $valueIconeName = "";
 $valueFileName = "";
 $up_file_extension_fileSend = "";
 $up_file_extension_icone = "";
+$up_file_destination_icone = "";
+$up_file_destination_fileSend="";
 
 if(isset($_POST['title']))
 {
@@ -59,6 +59,7 @@ if (isset($_POST['title']))
                     {
                         if($UpFileManager->upFileExist($iconeNameInFile . $up_file_extension_icone) == 0)
                         {
+                            $up_file_destination_icone = '/projet5/Web/upload_icone/'.$iconeNameInFile.$up_file_extension_icone;
                             $UpFileIcone = new \Entity\UpFile(
                                 [
                                     'up_filename' => $iconeNameInFile . $up_file_extension_icone,
@@ -150,6 +151,7 @@ if (isset($_POST['title']))
                     {
                         if($UpFileManager->upFileExist($fileSendNameInFile . $up_file_extension_fileSend) == 0)
                         {
+                            $up_file_destination_fileSend = '/projet5/Web/upload_fileSend/'.$fileSendNameInFile.$up_file_extension_fileSend;
                             $UpFileSend = new \Entity\UpFile(
                                 [
                                     'up_filename' => $fileSendNameInFile . $up_file_extension_fileSend,
@@ -225,8 +227,8 @@ if (isset($_POST['title']))
             'content' => $_POST['content'],
             'publish' => $_POST['publish'],
             'category' => $_POST['category'],
-            'iconeName' => $iconeNameInFile.$up_file_extension_icone,
-            'upfileName' => $fileSendNameInFile.$up_file_extension_fileSend
+            'iconeUrl' => $up_file_destination_icone,
+            'upfileUrl' => $up_file_destination_fileSend
         ]
         );
    
@@ -240,35 +242,23 @@ if (isset($_POST['title']))
         $UpFileManager->add($UpFileIcone);
         $manager->save($news);
         $message = '<p class="messageValidation">L\'article a bien été ajouté, il comporte un icone !<p/>';
-        if (isset($messageIconeValidated))
-        {
-            echo $messageIconeValidated, '<br />';
-        }
+        echo $messageIconeValidated, '<br />';
     }
     elseif($news->isValid() && isset($messageFileValidated) && isset($messageIcone) && $messageIcone == "Pas d'icone saisi." )
     {   
         $UpFileManager->add($UpFileSend);
         $manager->save($news);
         $message = '<p class="messageValidation">L\'article a bien été ajouté, il comporte un fichier principal !<p/>';
-        if (isset($messageFileValidated))
-        {
-            echo $messageFileValidated, '<br />';
-        }
+        echo $messageFileValidated, '<br />';
     }
     elseif($news->isValid() && isset($messageFileValidated) && isset($messageIconeValidated))
     {
         $UpFileManager->add($UpFileSend);
         $UpFileManager->add($UpFileIcone);
         $manager->save($news);
-        $message = '<p class="messageValidation">L\'article a bien été ajouté, il comporte un icone et un fichier principal !<p/>';
-        if (isset($messageIconeValidated))
-        {
-            echo $messageIconeValidated, '<br />';
-        }
-        if (isset($messageFileValidated))
-        {
-            echo $messageFileValidated, '<br />';
-        }
+        $message = '<p class="messageValidation">L\'article a bien été ajouté, il comporte un icone et un fichier principal !<p/>';      
+        echo $messageIconeValidated, '<br />';
+        echo $messageFileValidated, '<br />';
     }
     elseif($news->isValid() && isset($messageIcone) && $messageIcone != "Pas d'icone saisi." && isset($messageFile) && $messageFile == "Pas de fichier principal saisi." )
     {

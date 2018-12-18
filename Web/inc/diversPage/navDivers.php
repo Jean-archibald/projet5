@@ -27,6 +27,7 @@
           <?php
             }
           ?>
+           <li><a href="rechercher-1" class="smoothscroll">Rechercher</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->

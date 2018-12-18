@@ -60,6 +60,14 @@ elseif(preg_match('#article-([0-9]+)#', $url , $params))
     require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
 }
 
+elseif(preg_match('#rechercher-([0-9]+)#', $url , $params))
+{
+    $title = 'Rechercher';
+    $id = $params[1];
+    $direction = 'searchPublic';
+    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+}
+
 elseif(preg_match('#sessiondestroy#', $url , $params))
 {
 
@@ -119,6 +127,37 @@ elseif(preg_match('#abonne-([0-9]+)#', $url , $params))
     $title = 'Modifié abonné';
     $id = $params[1];
     $direction = 'modifyUser';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
+elseif(preg_match('#utilisateur-corbeille-([0-9]+)#', $url , $params))
+{
+    $title = 'Abonné placé dans la corbeille';
+    $id = $params[1];
+    $direction = 'trashUser';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
+elseif(preg_match('#article-corbeille-([0-9]+)#', $url , $params))
+{
+    $title = 'Article placé dans la corbeille';
+    $id = $params[1];
+    $direction = 'trashNews';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
+elseif(preg_match('#liste-fichiers-([0-9]+)#', $url , $params))
+{
+    $title = 'Liste des fichiers';
+    $id = $params[1];
+    $direction = 'listFiles';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
+elseif(preg_match('#effacer-fichier-([0-9]+)#', $url , $params))
+{
+    $id = $params[1];
+    $direction = 'deleteFile';
     require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 

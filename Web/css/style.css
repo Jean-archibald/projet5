@@ -523,3 +523,18 @@ td
   color:white;
   background-color: #16a085;
 }
+
+/* Page Search */
+
+
+.searchForm
+{
+  text-align: center;
+}
+
+/* Page Delete File */
+
+.deleteFile
+{
+  text-align: center;
+}

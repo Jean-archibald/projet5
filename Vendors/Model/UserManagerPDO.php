@@ -182,7 +182,7 @@ class UserManagerPDO extends UserManager
 
 
      /**
-     * @see UserManager::getLisTinTrash()
+     * @see UserManager::getTrashList()
      */
     public function getTrashList($start = -1, $limit = -1)
     {

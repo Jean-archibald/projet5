@@ -15,8 +15,11 @@ $title = $news->title();
 ?>
 
 <?php
-echo '<p>le ', $news->dateCreated()->format('d/m/Y à H\hi'), '</p>', "\n",
-    '<p>', nl2br($news->content()), '</p>', "\n";
+echo '<p>le ', $news->dateCreated()->format('d/m/Y à H\hi'), 
+    '<h2>',$news->title(),'</h2>','</p>',
+    '<p>','<img src="'.$news->iconeUrl().'"/>','</p>',
+    '<p>', nl2br($news->content()), '</p>', "\n",
+    '<p>','<embed src="'.$news->upfileUrl().'" width=800 height=1100 type="application/pdf"/>','</p>';
 
 if ($news->dateCreated() != $news->dateModified())
 {
