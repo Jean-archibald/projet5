@@ -15,6 +15,7 @@ $title = 'Supprimer fichier : ' .$fileToDeleteName;
 if (isset($_POST['delete']) &&  ($_POST['delete']) == 'oui')
 {
     $UpFileManager->delete($fileToDeleteId);
+    unlink($fileToDeleteUrl);
     $message = '<p class="messageSuppression">Le fichier a bien été supprimé !<p/>';
 }
 elseif(isset($_POST['delete']) && ($_POST['delete']) == 'non')

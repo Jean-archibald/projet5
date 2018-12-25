@@ -8,7 +8,7 @@ ob_start();
 
 if(isset($_POST['email']))
 {  
-    $password = htmlspecialchars($_POST['password']);
+    $password = sha1($_POST['password']);
     $email = htmlspecialchars($_POST['email']);
     $userExist = $userManager->userExist($email,$password);
     

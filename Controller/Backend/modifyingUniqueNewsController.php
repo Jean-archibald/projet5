@@ -290,7 +290,7 @@ if (isset($_POST['title']))
         <?php if (isset($errors) && in_array(\Entity\News::INVALID_CONTENT, $errors))
         echo '<p class="messageProbleme">Il manque le contenu.<p/>'; ?>
         <label for="content">Ajouter du texte : </label>     
-        <textarea id="mytextarea" name="content" id="content"><?php if (isset($newsToModify)) echo $newsToModify->content() ?></textarea>
+        <textarea id="mytextarea" class="ckeditor" name="content" id="content" rows="10" cols="80"><?php if (isset($newsToModify)) echo $newsToModify->content() ?></textarea>
         <br/>
 
         <p>

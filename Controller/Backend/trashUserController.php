@@ -25,6 +25,11 @@ if ($id != 0)
     }
 }
 
+if (isset($message))
+{
+    echo $message, '<br />';
+}
+
 
 $trashContentTemplate = ob_get_clean();
 require __DIR__.'/../../View/Backend/trashUserView.php';

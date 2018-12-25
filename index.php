@@ -100,6 +100,14 @@ elseif(preg_match('#liste-articles-([0-9]+)#', $url , $params))
     require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
+elseif(preg_match('#delete-([0-9]+)#', $url , $params))
+{
+    $title = 'Liste des articles';
+    $id = $params[1];
+    $direction = 'deleteNews';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
 elseif(preg_match('#modification-([0-9]+)#', $url , $params))
 {
     $id = $params[1];

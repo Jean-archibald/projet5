@@ -150,7 +150,7 @@ class NewsManagerPDO extends NewsManager
      */
     public function getListInTrash($start = -1, $limit = -1)
     {
-        $sql = 'SELECT id, title, trash, dateCreated, dateModified 
+        $sql = 'SELECT id, title, category, content, publish, iconeUrl, upfileUrl, trash, dateCreated, dateModified
         FROM news
         WHERE trash = \'oui\'
         ORDER BY id DESC';

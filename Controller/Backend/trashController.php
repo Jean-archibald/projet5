@@ -8,6 +8,24 @@ ob_start();
 
 $usersInTrash = $userManager->countTrash();
 $newsInTrash = $manager->countTrash();
+
+$newsPerPage = 20;
+$newsTotals = $manager->count() ;
+$totalPages = ceil($newsTotals/$newsPerPage);
+
+if(isset($id) AND !empty($id) AND $id > 0 AND $id <= $totalPages)
+{
+  $id = intval($id);
+  $pageNow = $id;    
+}
+else
+{
+  $pageNow = 1;
+}
+
+$started = ($pageNow-1)*$newsPerPage;
+
+
 ?>
 
 
@@ -39,26 +57,28 @@ foreach ($userManager->getTrashList() as $user)
 
 }
 ?>
+</table>
 
 <p class="infoListe">Il y a  <?= $newsInTrash ?> article(s) dans la corbeille </p>\<br/>
+
+<table>
 <?php
 if ( $newsInTrash != 0)
 {
 ?>
 
-      <tr><th>Titre</th><th>Catégorie</th><th>Publier</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>
+      <tr><th>Titre</th><th>Catégorie</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>
 <?php
 
-foreach ($manager->getList($started, $newsPerPage) as $news)
+foreach ($manager->getListInTrash($started, $newsPerPage) as $news)
 {
     echo '<tr><td>',
     $news->title(), '</td><td>',
     $news->category(), '</td><td>',
-    $news->publish(), '</td><td>',
     $news->dateCreated()->format('d/m/Y à H\hi'),'</td><td>',
     ($news->dateCreated() == $news->dateModified() ? '-' : $news->dateModified()->format('d/m/Y à H\hi')),'</td><td>
-    <a href="modification-',$news->id(), '">Modifier</a>
-    | <a href="article-supprimer-', $news->id(), '">Corbeille</a>
+    <a href="récuperer-',$news->id(), '">Récuperer</a>
+    | <a href="delete-', $news->id(), '">Supprimer</a>
     </td></tr>', "\n";
 }
 

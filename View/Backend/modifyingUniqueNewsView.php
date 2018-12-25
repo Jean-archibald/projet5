@@ -29,9 +29,9 @@
     include('Web/inc/allPages/script.php'); 
     ?>
 
-    <!-- script tinyMCE -->
+    <!-- script Ckeditor -->
     <?php
-    include('Web/incAdmin/writeArticlePage/scriptPlusTinyMCEAdmin.php');
+    include('Web/incAdmin/writeArticlePage/scriptckeditor.php');
     ?>
 
     </body>
