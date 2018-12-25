@@ -38,7 +38,7 @@ if ( $usersInTrash != 0)
 {
 ?>
 
-<tr><th>Nom</th><th>Prenom</th><th>Email</th><th>Password</th><th>statut</th><th>Inscription</th><th>Action</th></tr>
+<tr><th>Nom</th><th>Prenom</th><th>Email</th><th>statut</th><th>Inscription</th><th>Action</th></tr>
 <?php
 
 foreach ($userManager->getTrashList() as $user)
@@ -47,10 +47,9 @@ foreach ($userManager->getTrashList() as $user)
     $user->familyName(), '</td><td>',
     $user->firstName(), '</td><td>',
     $user->email(), '</td><td>',
-    $user->password(), '</td><td>',
     $user->status(), '</td><td>',
     $user->dateCreated()->format('d/m/Y à H\hi'),'</td><td>
-    <a href="abonne-',$user->id(), '">Modifier</a>
+    <a href="sortir-',$user->id(), '">Récuperer</a>
     | <a href="utilisateur-supprimer-', $user->id(), '">Supprimer</a>
     </td></tr>', "\n";
 }
@@ -77,7 +76,7 @@ foreach ($manager->getListInTrash($started, $newsPerPage) as $news)
     $news->category(), '</td><td>',
     $news->dateCreated()->format('d/m/Y à H\hi'),'</td><td>',
     ($news->dateCreated() == $news->dateModified() ? '-' : $news->dateModified()->format('d/m/Y à H\hi')),'</td><td>
-    <a href="récuperer-',$news->id(), '">Récuperer</a>
+    <a href="recuperer-',$news->id(), '">Récuperer</a>
     | <a href="delete-', $news->id(), '">Supprimer</a>
     </td></tr>', "\n";
 }

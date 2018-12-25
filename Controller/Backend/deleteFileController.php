@@ -32,7 +32,7 @@ if (isset($fileToDelete) &&  ($fileToDelete->id() != ""))
 <?php
 }
 ?>
-<form action="<?=$url?>" method="post" class="deleteFile">
+<form action="<?=$url?>" method="post" class="deleteForm">
     <p>
         <?php
             if (isset($message))
@@ -62,6 +62,6 @@ if (isset($fileToDelete) &&  ($fileToDelete->id() != ""))
 
 
 <?php 
-$deleteFileContentTemplate = ob_get_clean();
-require __DIR__.'/../../View/Backend/deleteFileView.php';
+$deleteContentTemplate = ob_get_clean();
+require __DIR__.'/../../View/Backend/deleteView.php';
 ?>

@@ -10,14 +10,13 @@ $userToDelete = "";
 if ($id != 0)
 {
     $userToDelete = $userManager->getUserById($id);
-    $userToDelete->setTrash('oui');
-    
+    $userToDelete->setTrash('non');
     
     if($userToDelete->isValid())
     {
         $userManager->save($userToDelete);
 
-        $message = '<p class="messageValidation">L\'utilisateur a bien été mis dans la Corbeille!</p>';
+        $message = '<p class="messageValidation">L\'utilisateur a bien été sorti de la Corbeille!</p>';
     }
     else
     {

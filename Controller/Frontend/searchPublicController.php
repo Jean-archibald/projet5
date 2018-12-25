@@ -90,8 +90,7 @@ if (isset($_POST['q']) AND !empty($_POST['q']))
                 $content, '</td><td>',
                 $news->dateCreated()->format('d/m/Y à H\hi'),'</td><td>',
                 ($news->dateCreated() == $news->dateModified() ? '-' : $news->dateModified()->format('d/m/Y à H\hi')),'</td><td>',
-                '<a href="article-', $news->id(), '">', $news->title(), '</a>','</td><td>','
-                </td></tr>', "\n";
+                '<a href="article-', $news->id(), '">', $news->title(), '</a>','</td></tr>', "\n";
             }
 
         }
@@ -150,8 +149,7 @@ if (isset($_POST['q']) AND !empty($_POST['q']))
                 $content, '</td><td>',
                 $news->dateCreated()->format('d/m/Y à H\hi'),'</td><td>',
                 ($news->dateCreated() == $news->dateModified() ? '-' : $news->dateModified()->format('d/m/Y à H\hi')),'</td><td>',
-                '<a href="article-', $news->id(), '">', $news->title(), '</a>','</td><td>','
-                </td></tr>', "\n";
+                '<a href="article-', $news->id(), '">', $news->title(), '</a>','</td></tr>', "\n";
             }
 
         }
@@ -211,8 +209,7 @@ if (isset($_POST['q']) AND !empty($_POST['q']))
                 $content, '</td><td>',
                 $news->dateCreated()->format('d/m/Y à H\hi'),'</td><td>',
                 ($news->dateCreated() == $news->dateModified() ? '-' : $news->dateModified()->format('d/m/Y à H\hi')),'</td><td>',
-                '<a href="article-', $news->id(), '">', $news->title(), '</a>','</td><td>','
-                </td></tr>', "\n";
+                '<a href="article-', $news->id(), '">', $news->title(), '</a>','</td></tr>', "\n";
             }
 
         }

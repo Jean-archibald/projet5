@@ -23,8 +23,8 @@ elseif(isset($_POST['delete']) && $_POST['delete'] == 'non')
 }
 
 ?>
-<form action="<?=$url?>.php" method="post" class="deleteUser">
-    <p>
+<form action="<?=$url?>.php" method="post" class="deleteForm">
+    <p >
         <?php
             if (isset($message))
             {
@@ -41,7 +41,7 @@ elseif(isset($_POST['delete']) && $_POST['delete'] == 'non')
         <label for="non">non</label>
         </p>
         
-        <input type="submit" value="Supprimer" name="Supprimer" />
+        <input type="submit" value="Supprimer" name="Supprimer"/>
         <?php
             }
         ?>
@@ -52,6 +52,6 @@ elseif(isset($_POST['delete']) && $_POST['delete'] == 'non')
 
 
 <?php 
-$deleteNewsContentTemplate = ob_get_clean();
-require __DIR__.'/../../View/Backend/deleteNewsView.php';
+$deleteContentTemplate = ob_get_clean();
+require __DIR__.'/../../View/Backend/deleteView.php';
 ?>

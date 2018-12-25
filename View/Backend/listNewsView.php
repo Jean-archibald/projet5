@@ -16,7 +16,7 @@
 
     <!-- Content  -->
     <?php
-    include('Web/incAdmin/modifNewsPage/modifNewsContent.php');
+    include('Web/incAdmin/listNewsPage/listNewsContent.php');
     ?>
 
     <!-- Copyright -->

@@ -1,5 +1,5 @@
 
-<section id="listUsers">
+<section id="modifyNews">
     <div>
         <div>
         <p><?= $listUsersContentTemplate ?></p>

@@ -460,7 +460,6 @@ td
  color : red;
 }
 
-
 .paginationListUsers
 {
   text-align: center;
@@ -479,14 +478,6 @@ td
   text-align: center;
   border-width : 5px;
   border-style: solid;
-}
-
-#deleteUser
-{
-  text-align: center;
-  border-width : 5px;
-  border-style: solid;
-  border-color: darkred;
 }
 
 .uniqueNewsTitle
@@ -532,9 +523,12 @@ td
   text-align: center;
 }
 
-/* Page Delete File */
+/* Page Delete  */
 
-.deleteFile
+#deleteForm
 {
   text-align: center;
+  border-width : 5px;
+  border-style: solid;
+  border-color: darkred;
 }

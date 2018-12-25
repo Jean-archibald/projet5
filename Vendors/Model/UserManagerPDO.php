@@ -98,7 +98,7 @@ class UserManagerPDO extends UserManager
     */
     public function getUserById($id)
     {
-        $request = $this->dao->prepare('SELECT id, familyName, firstName, email, password
+        $request = $this->dao->prepare('SELECT id, familyName, firstName, email, password, status
         FROM users WHERE id = :id');
         $request->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $request->execute();

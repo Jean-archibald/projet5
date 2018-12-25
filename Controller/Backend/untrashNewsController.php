@@ -10,13 +10,13 @@ $newsToDelete = "";
 if ($id != 0)
 {
     $newsToDelete = $manager->getUnique($id);
-    $newsToDelete->setTrash('oui');
+    $newsToDelete->setTrash('non');
     
     if($newsToDelete->isValid())
     {
         $manager->save($newsToDelete);
 
-        $message = '<p class="messageValidation">L\'article a bien été mis dans la Corbeille!</p>';
+        $message = '<p class="messageValidation">L\'article a bien été sorti de la Corbeille!</p>';
     }
     else
     {

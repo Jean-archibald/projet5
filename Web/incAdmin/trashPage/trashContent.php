@@ -1,4 +1,4 @@
-<section id="trashContent">
+<section>
     <div>
         <div>
         <p><?=$trashContentTemplate?></p>

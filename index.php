@@ -115,6 +115,14 @@ elseif(preg_match('#modification-([0-9]+)#', $url , $params))
     require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
+elseif(preg_match('#recuperer-([0-9]+)#', $url , $params))
+{
+    $title = 'Article sorti de la corbeille';
+    $id = $params[1];
+    $direction = 'untrashNews';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
 elseif(preg_match('#ajouter#', $url , $params))
 {
     $title = 'Ajouter un abonné';
@@ -146,6 +154,14 @@ elseif(preg_match('#utilisateur-corbeille-([0-9]+)#', $url , $params))
     require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
 
+elseif(preg_match('#sortir-([0-9]+)#', $url , $params))
+{
+    $title = 'Abonné sorti de la corbeille';
+    $id = $params[1];
+    $direction = 'untrashUser';
+    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
+}
+
 elseif(preg_match('#article-corbeille-([0-9]+)#', $url , $params))
 {
     $title = 'Article placé dans la corbeille';
@@ -153,6 +169,8 @@ elseif(preg_match('#article-corbeille-([0-9]+)#', $url , $params))
     $direction = 'trashNews';
     require __DIR__.'/Controller/Backend/testConnectAdminController.php';
 }
+
+
 
 elseif(preg_match('#liste-fichiers-([0-9]+)#', $url , $params))
 {

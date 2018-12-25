@@ -18,10 +18,10 @@ else
 }
 
 $started = ($pageNow-1)*$newsPerPage;
-
+$totalNews = $manager->count();
 ?>
 
-<p class="messageInfo">Il y a  <?= $manager->count() ?> article(s) :</p>
+<p class="messageInfo">Il y a  <?= $totalNews ?> article(s) :</p>
 <?php
 if($manager->count() > 0)
 {
@@ -50,16 +50,19 @@ foreach ($manager->getList($started, $newsPerPage) as $news)
 
 <?php
 }
-    for($i=1;$i<=$totalPages ;$i++)
+    if($totalNews > 20)
     {
-    if($i == $pageNow)
-    {
-        echo $i.' ';
-    }
-    else
-    {
-    echo '<a href="liste-articles-' .$i.'">'.$i. '</a> ';
-    }
+        for($i=1;$i<=$totalPages ;$i++)
+        {
+        if($i == $pageNow)
+        {
+            echo $i.' ';
+        }
+        else
+        {
+        echo '<a href="liste-articles-' .$i.'">'.$i. '</a> ';
+        }
+        }
     }
 ?>
 
@@ -67,5 +70,5 @@ foreach ($manager->getList($started, $newsPerPage) as $news)
 
 <?php 
 $modifyNewsContentTemplate = ob_get_clean();
-require __DIR__.'/../../View/Backend/modifNewsView.php';
+require __DIR__.'/../../View/Backend/listNewsView.php';
 ?>

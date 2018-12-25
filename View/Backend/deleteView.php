@@ -20,13 +20,13 @@ include('Web/incAdmin/allAdminPages/titleAdmin.php');
 
 <!-- Content  -->
 <?php
-include('Web/incAdmin/deleteFilePage/deleteFileContent.php');
+include('Web/incAdmin/deletePage/deleteContent.php');
 ?>
 
 <!-- Copyright -->
 <?php
-    include('Web/inc/allPages/copyright.php'); 
-    ?>
+include('Web/inc/allPages/copyright.php'); 
+?>
 
 <!-- Script -->
 <?php
