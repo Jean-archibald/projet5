@@ -6,206 +6,224 @@ if (isset($_GET['url']))
     $url = $_GET['url'];
 }
 
-//PARTIE FRONTEND PUBLIC
 
+//PARTIE ADMIN
+//connexion
 if($url == '')
 {
-    require __DIR__.'/Controller/Frontend/connexionController.php';
+    $title = 'Blog Santé - Se connecter';
+    $url = 'connexion';
+    require __DIR__.'/ControllerAdmin/connexionAdminController.php';
 
 }
 
-elseif(preg_match('#accueil#', $url , $params))
+//deconnexion
+elseif(preg_match('#sessiondestroy#', $url , $params))
 {
-    $title = 'Accueil';
-    $direction = 'home';
-    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+
+    require __DIR__.'/ControllerAdmin/deconnexionController.php';
 }
 
+
+//home Admin
+elseif(preg_match('#accueilAdmin#', $url , $params))
+{
+    $content = "";
+    $title = 'Blog Santé / Tableau de bord';
+    $direction = 'homeAdmin';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+//Gestion Article
+//rédiger
+elseif(preg_match('#rediger#', $url , $params))
+{
+    $title = 'Rédaction d\'un article';
+    $direction = 'writeNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//modifier un article
+elseif(preg_match('#modifierArticle-([0-9]+)#', $url , $params))
+{
+    $title = 'Rédaction d\'un article';
+    $id = $params[1];
+    $direction = 'modifyUniqueNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//Liste des article
+elseif(preg_match('#liste-articles-([0-9]+)#', $url , $params))
+{
+    $title = 'Liste des articles';
+    $direction = 'listNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//Placer un article dans la corbeille
+elseif(preg_match('#articleCorbeille-([0-9]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $direction = 'trashNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+//Sortir un article dans la corbeille
+elseif(preg_match('#recupererArticle-([0-9]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $direction = 'untrashNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//Publier un article 
+elseif(preg_match('#publier-article-([0-9]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $direction = 'publishNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//Passer un article en brouillon
+elseif(preg_match('#brouillon-article-([0-9]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $direction = 'unpublishNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//Supprimer un article
+elseif(preg_match('#supprimerArticle-([0-9]+)#', $url , $params))
+{
+    $title = 'Supprimer un article';
+    $id = $params[1];
+    $direction = 'deleteNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+
+//Gestion abonné
+//ajouter
+elseif(preg_match('#register#', $url , $params))
+{
+    $title = 'Inscrire un abonné';
+    $direction = 'register';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//modifier abonné
+elseif(preg_match('#utilisateurModifier-([0-9]+)#', $url , $params))
+{
+    $title = 'Modifier les infos d\'un abonné';
+    $id = $params[1];
+    $direction = 'modifyUser';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//liste abonnés
+elseif(preg_match('#liste-abonne#', $url , $params))
+{
+    $title = 'Liste des abonnés';
+    $direction = 'listUsers';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//Placer un abonné dans la corbeille
+elseif(preg_match('#utilisateurCorbeille-([0-9]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $direction = 'trashUser';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+//Sortir un abonné de la corbeille
+elseif(preg_match('#recupererUtilisateur-([0-9]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $direction = 'untrashUser';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+//Supprimer un abonné
+elseif(preg_match('#supprimerUtilisateur-([0-9]+)#', $url , $params))
+{
+    $title = 'Supprimer un abonné';
+    $id = $params[1];
+    $direction = 'deleteUser';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+
+//Corbeille
+//corbeille utilisateur
+elseif(preg_match('#listeUtilisateursCorbeille#', $url , $params))
+{
+    $title = 'Corbeille des utilisateurs';
+    $direction = 'listUserTrash';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+//corbeille articles
+elseif(preg_match('#listeArticlesCorbeille#', $url , $params))
+{
+    $title = 'Corbeille des articles';
+    $direction = 'listNewsTrash';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+
+
+//PARTIE PUBLIC 
+
+//home Public
+elseif(preg_match('#blogAccueil#', $url , $params))
+{
+    $content = "";
+    $title = 'Blog Santé / Dr Marie-Pierre Delafontaine';
+    $direction = 'homePublic';
+    require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
+}
+
+//list News Public by Category
 elseif(preg_match('#medecinegenerale#', $url , $params))
 {
     $title = 'Medecine Generale';
-    $direction = 'listNews';
+    $direction = 'listNewsPublic';
     $category = 'medecine generale';
-    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+    require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
 }
 
 elseif(preg_match('#nutrition#', $url , $params))
 {
     $title = 'Nutrition';
-    $direction = 'listNews';
+    $direction = 'listNewsPublic';
     $category = 'nutrition';
-    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+    require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
 }
 
 elseif(preg_match('#allergologie#', $url , $params))
 {
     $title = 'Allergologie';
-    $direction = 'listNews';
+    $direction = 'listNewsPublic';
     $category = 'allergologie';
-    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+    require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
 }
 
 elseif(preg_match('#divers#', $url , $params))
 {
     $title = 'Divers';
-    $direction = 'listNews';
+    $direction = 'listNewsPublic';
     $category = 'divers';
-    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
+    require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
 }
 
-elseif(preg_match('#article-([0-9]+)#', $url , $params))
+elseif(preg_match('#lire-([0-9]+)#', $url , $params))
 {
     $id = $params[1];
     $direction = 'uniqueNews';
-    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
-}
-
-elseif(preg_match('#rechercher-([0-9]+)#', $url , $params))
-{
-    $title = 'Rechercher';
-    $id = $params[1];
-    $direction = 'searchPublic';
-    require __DIR__.'/Controller/Frontend/testConnectPublicController.php';
-}
-
-elseif(preg_match('#sessiondestroy#', $url , $params))
-{
-
-    require __DIR__.'/Controller/Frontend/deconnexionController.php';
+    require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
 }
 
 
 
-//PARTIE BACKEND 
-
-elseif(preg_match('#admin#', $url , $params))
-{
-    $title = 'Administration';
-    $direction = 'adminHome';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#creer#', $url , $params))
-{
-    $title = 'Creation';
-    $direction = 'writeNews';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#liste-articles-([0-9]+)#', $url , $params))
-{
-    $title = 'Liste des articles';
-    $id = $params[1];
-    $direction = 'listNews';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#delete-([0-9]+)#', $url , $params))
-{
-    $title = 'Liste des articles';
-    $id = $params[1];
-    $direction = 'deleteNews';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#modification-([0-9]+)#', $url , $params))
-{
-    $id = $params[1];
-    $direction = 'modifyingUniqueNews';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#recuperer-([0-9]+)#', $url , $params))
-{
-    $title = 'Article sorti de la corbeille';
-    $id = $params[1];
-    $direction = 'untrashNews';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#ajouter#', $url , $params))
-{
-    $title = 'Ajouter un abonné';
-    $direction = 'addUser';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#liste-abonne-([0-9]+)#', $url , $params))
-{
-    $title = 'Liste des abonnés';
-    $id = $params[1];
-    $direction = 'listUsers';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#abonne-([0-9]+)#', $url , $params))
-{
-    $title = 'Modifié abonné';
-    $id = $params[1];
-    $direction = 'modifyUser';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#utilisateur-corbeille-([0-9]+)#', $url , $params))
-{
-    $title = 'Abonné placé dans la corbeille';
-    $id = $params[1];
-    $direction = 'trashUser';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#sortir-([0-9]+)#', $url , $params))
-{
-    $title = 'Abonné sorti de la corbeille';
-    $id = $params[1];
-    $direction = 'untrashUser';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#article-corbeille-([0-9]+)#', $url , $params))
-{
-    $title = 'Article placé dans la corbeille';
-    $id = $params[1];
-    $direction = 'trashNews';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
 
 
 
-elseif(preg_match('#liste-fichiers-([0-9]+)#', $url , $params))
-{
-    $title = 'Liste des fichiers';
-    $id = $params[1];
-    $direction = 'listFiles';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
 
-elseif(preg_match('#effacer-fichier-([0-9]+)#', $url , $params))
-{
-    $id = $params[1];
-    $direction = 'deleteFile';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
 
-elseif(preg_match('#corbeille-([0-9]+)#', $url , $params))
-{
-    $title = 'Corbeille';
-    $id = $params[1];
-    $direction = 'trash';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#utilisateur-supprimer-([0-9]+)#', $url , $params))
-{
-    
-    $id = $params[1];
-    $direction = 'deleteUser';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}
-
-elseif(preg_match('#customizer#', $url , $params))
-{
-    $title = 'Customization du site';
-    $direction = 'adminHome';
-    require __DIR__.'/Controller/Backend/testConnectAdminController.php';
-}

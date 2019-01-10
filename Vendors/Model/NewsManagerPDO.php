@@ -10,15 +10,13 @@ class NewsManagerPDO extends NewsManager
      */
     protected function add(News $news)
     {
-        $request = $this->dao->prepare('INSERT INTO news(title, category, content, publish, iconeUrl, upfileUrl, trash, dateCreated, dateModified) 
-        VALUES(:title, :category, :content, :publish, :iconeUrl, :upfileUrl, :trash, NOW(), NOW())');
+        $request = $this->dao->prepare('INSERT INTO news(title, category, content, publish, trash, dateCreated, dateModified) 
+        VALUES(:title, :category, :content, :publish,  :trash, NOW(), NOW())');
 
         $request->bindValue(':title', $news->title());
         $request->bindValue(':category', $news->category());
         $request->bindValue(':content', $news->content());
-        $request->bindValue(':publish', $news->publish());
-        $request->bindValue(':iconeUrl', $news->iconeUrl());
-        $request->bindValue(':upfileUrl', $news->upfileUrl());
+        $request->bindValue(':publish', 'non');
         $request->bindValue(':trash', 'non');
         
 
@@ -30,7 +28,7 @@ class NewsManagerPDO extends NewsManager
      */
     public function count()
     {
-        return $this->dao->query('SELECT COUNT(*) FROM news')->fetchColumn();
+        return $this->dao->query('SELECT COUNT(*) FROM news WHERE trash=\'non\'')->fetchColumn();
     }
 
      /**
@@ -77,7 +75,7 @@ class NewsManagerPDO extends NewsManager
     /**
      * @see NewsManager::getListPublish()
      */
-    public function getListPublishByCategory($start = -1, $limit = -1, $category)
+    public function getListPublishByCategory($category)
     {
         $sql = 'SELECT id, title, category, content, publish, dateCreated, dateModified 
         FROM news
@@ -85,10 +83,7 @@ class NewsManagerPDO extends NewsManager
         ORDER BY id DESC';
 
         //Check if the given param are int
-        if ($start != -1 || $limit != -1)
-        {
-            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
-        }
+        
 
         $request = $this->dao->prepare($sql);
         $request->execute(array($category));
@@ -150,7 +145,7 @@ class NewsManagerPDO extends NewsManager
      */
     public function getListInTrash($start = -1, $limit = -1)
     {
-        $sql = 'SELECT id, title, category, content, publish, iconeUrl, upfileUrl, trash, dateCreated, dateModified
+        $sql = 'SELECT id, title, category, content, publish, trash, dateCreated, dateModified
         FROM news
         WHERE trash = \'oui\'
         ORDER BY id DESC';
@@ -180,12 +175,50 @@ class NewsManagerPDO extends NewsManager
         return $newsList;
     } 
 
+
+     /**
+     * @see NewsManager::getLisTLastPublish()
+     */
+    public function getListLastPublish($start = -1, $limit = -1)
+    {
+        $sql = 'SELECT id, title, category, content, publish, trash, dateCreated, dateModified
+        FROM news
+        WHERE publish = \'oui\'
+        ORDER BY id DESC';
+
+        //Check if the given param are int
+        if ($start != -1 || $limit != -1)
+        {
+            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
+        }
+
+        $request = $this->dao->query($sql);
+        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
+        
+        $newsList = $request->fetchAll();
+        
+
+        // Use foreach to give instance of DateTime as created date and modified date.
+        foreach ($newsList as $news)
+        {
+            
+            $news->setDateCreated(new \DateTime($news->dateCreated()));
+            $news->setDateModified(new \DateTime($news->dateModified()));
+        }
+
+        $request->closeCursor();
+
+        return $newsList;
+    } 
+
+            
+
     /**
      * @see NewsManager::getUnique()
      */
     public function getUnique($id)
     {
-        $request = $this->dao->prepare('SELECT id, title, category, content, publish, iconeUrl, upfileUrl, trash, dateCreated, dateModified 
+        $request = $this->dao->prepare('SELECT id, title, category, content, publish, trash, dateCreated, dateModified 
         FROM news WHERE id = :id');
         $request->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $request->execute();
@@ -221,123 +254,17 @@ class NewsManagerPDO extends NewsManager
     protected function modify(News $news)
     {
     $request = $this->dao->prepare('UPDATE news 
-    SET  title = :title, content = :content, publish = :publish, iconeUrl = :iconeUrl, upfileUrl = :upfileUrl, trash = :trash, dateModified = NOW()
+    SET  title = :title, content = :content, publish = :publish, trash = :trash, dateModified = NOW()
     WHERE id = :id');
    
     $request->bindValue(':title', $news->title());
     $request->bindValue(':content', $news->content());
     $request->bindValue(':publish', $news->publish());
-    $request->bindValue(':iconeUrl', $news->iconeUrl());
-    $request->bindValue(':upfileUrl', $news->upfileUrl());
     $request->bindValue(':trash', $news->trash());
     $request->bindValue(':id', $news->id(), \PDO::PARAM_INT);
 
     $request->execute();
     }
-
-
-    /**
-    * @see NewsManager::searchNewsByTitle()
-    */
-    public function searchNewsByTitle($start = -1, $limit = -1, $q)
-    {
-        $sql = 'SELECT DISTINCT id, title, content, trash, publish, category, dateCreated, dateModified 
-        FROM news
-        WHERE trash = \'non\' AND publish = \'oui\' AND title LIKE "%'.$q.'%" 
-        ORDER BY id DESC';
-
-        //Check if the given param are int
-        if ($start != -1 || $limit != -1)
-        {
-            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
-        }
-
-        $request = $this->dao->query($sql);
-
-        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
-        $newsSearchList = $request->fetchAll();
-
-        foreach ($newsSearchList as $news)
-        {
-            $news->setDateCreated(new \DateTime($news->dateCreated()));
-            $news->setDateModified(new \DateTime($news->dateModified()));
-        }
-
-        $request->closeCursor();
-
-        return $newsSearchList;
-    }
-
-
-      /**
-    * @see NewsManager::searchNewsByConcat()
-    */
-    public function searchNewsByContent($start = -1, $limit = -1, $q)
-    {
-        $sql = 'SELECT DISTINCT id, title, content, trash, publish, category, dateCreated, dateModified
-        FROM news
-        WHERE trash = \'non\' AND publish = \'oui\' AND content LIKE "%'.$q.'%" 
-        ORDER BY id DESC';
-
-        //Check if the given param are int
-        if ($start != -1 || $limit != -1)
-        {
-            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
-        }
-
-        $request = $this->dao->query($sql);
-
-        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
-        $newsSearchList = $request->fetchAll();
-
-        foreach ($newsSearchList as $news)
-        {
-            $news->setDateCreated(new \DateTime($news->dateCreated()));
-            $news->setDateModified(new \DateTime($news->dateModified()));
-        }
-
-        $request->closeCursor();
-
-        return $newsSearchList;
-    }
-
-
-      /**
-    * @see NewsManager::searchNewsByConcat()
-    */
-    public function searchNewsByConcat($start = -1, $limit = -1, $q)
-    {
-        $sql = 'SELECT DISTINCT id, title, content, trash, publish, category, dateCreated, dateModified
-        FROM news
-        WHERE trash = \'non\' AND publish = \'oui\' AND CONCAT(title,content) LIKE "%'.$q.'%" 
-        ORDER BY id DESC';
-
-        //Check if the given param are int
-        if ($start != -1 || $limit != -1)
-        {
-            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
-        }
-
-        $request = $this->dao->query($sql);
-
-        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
-        $newsSearchList = $request->fetchAll();
-
-        foreach ($newsSearchList as $news)
-        {
-            $news->setDateCreated(new \DateTime($news->dateCreated()));
-            $news->setDateModified(new \DateTime($news->dateModified()));
-        }
-
-        $request->closeCursor();
-
-        return $newsSearchList;
-    }
-
-
-   
-
-   
-
+ 
     
 }

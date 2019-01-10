@@ -56,7 +56,7 @@ abstract class NewsManager extends Manager
      * @param $limit int The number of chapter to select
      * @return array The list of the chapters, Each entrance is an instance of Chapter.
      */
-    abstract public function getListPublishByCategory($start ,$limit ,$category );
+    abstract public function getListPublishByCategory($category );
 
      /**
      * Method return a list of asked chapters
@@ -65,6 +65,15 @@ abstract class NewsManager extends Manager
      * @return array The list of the chapters, Each entrance is an instance of Chapter.
      */
     abstract public function getList($start = -1,$limit = -1);
+
+
+     /**
+     * Method return a list of asked chapters
+     * @param $start int The first chapter to select
+     * @param $limit int The number of chapter to select
+     * @return array The list of the chapters, Each entrance is an instance of Chapter.
+     */
+    abstract public function getListLastPublish($start = -1,$limit = -1);
 
     /**
      * Method return a list of asked News
@@ -101,27 +110,6 @@ abstract class NewsManager extends Manager
     abstract protected function modify(News $news);
 
 
-    /**
-     * Method to search a news
-     * @param $id int Identification of the news to get
-     * @return News the news asked
-     */
-    abstract public function searchNewsByTitle($start = -1, $limit = -1,$q);
-
-    /**
-     * Method to search a news
-     * @param $id int Identification of the news to get
-     * @return News the news asked
-     */
-    abstract public function searchNewsByContent($start = -1, $limit = -1,$q);
-
-
-    /**
-     * Method to search a news
-     * @param $id int Identification of the news to get
-     * @return News the news asked
-     */
-    abstract public function searchNewsByConcat($start = -1, $limit = -1,$q);
-
+    
 
 }

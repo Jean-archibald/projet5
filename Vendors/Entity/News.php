@@ -11,8 +11,6 @@ class News extends Entity
                 $content,
                 $category,
                 $publish,
-                $iconeUrl,
-                $upfileUrl,
                 $dateCreated,
                 $dateModified;
 
@@ -43,16 +41,6 @@ class News extends Entity
         {
             $this->title = $title;
         }
-    }
-
-    public function setIconeUrl($iconeUrl)
-    { 
-            $this->iconeUrl = $iconeUrl;
-    }
-
-    public function setUpfileUrl($upfileUrl)
-    { 
-            $this->upfileUrl = $upfileUrl;
     }
 
     public function setContent($content)
@@ -113,16 +101,6 @@ class News extends Entity
     public function publish()
     {
         return $this->publish;
-    }
-
-    public function iconeUrl()
-    {
-        return $this->iconeUrl;
-    }
-
-    public function upfileUrl()
-    {
-        return $this->upfileUrl;
     }
 
     public function dateCreated()

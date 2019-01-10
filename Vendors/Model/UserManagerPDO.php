@@ -55,7 +55,7 @@ class UserManagerPDO extends UserManager
      */
     public function count()
     {
-        return $this->dao->query('SELECT COUNT(*) FROM users')->fetchColumn();
+        return $this->dao->query('SELECT COUNT(*) FROM users WHERE trash = \'non\'')->fetchColumn();
     }
 
    
