@@ -6,9 +6,6 @@
 include('Web/inc/allpages/headAdmin.php'); 
 ?>
 
-<body class="uniqueNews">
-
-<div class="article">
 
 <!-- Table Content -->
 <?php

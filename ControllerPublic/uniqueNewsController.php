@@ -2,14 +2,16 @@
 
 $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $manager = new \Model\NewsManagerPDO($dao);
-
-ob_start();
-?>
-
-<?php
-
 $news = $manager->getUnique((int) $id);
 $title = $news->title();
+$category = $news->category();
+ob_start();
+?>
+<body id="uniqueNews" title="<?=$category?>">
+
+<div class="article">
+<?php
+
 
 
 ?>
