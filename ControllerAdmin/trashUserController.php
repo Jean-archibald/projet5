@@ -21,7 +21,7 @@ if ($id != 0)
     {
         $userManager->save($userToDelete);
 
-        $message = '<p class="messageInfo">L\'utilisateur '. $userToDeleteName .' '.$userToDeleteFirstName .' a bien été mis dans la Corbeille!</p>';
+        $message = '<p id="message" title="info">L\'utilisateur '. $userToDeleteName .' '.$userToDeleteFirstName .' a bien été mis dans la Corbeille!</p>';
     }
     else
     {

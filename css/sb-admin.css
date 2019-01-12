@@ -376,14 +376,6 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 /*AJOUT PERSO*/
-/* Message Style */
-
-.messageInfo
-{
-   text-align: center;
-   color:white;
-   font-size:1.2em;
-}
 
 /*delete design*/
 
@@ -410,9 +402,12 @@ body.sidebar-toggled footer.sticky-footer {
 .descriptonBienvenue
 {
 text-align: left;
-padding-top:50px;
+padding:50px;
+margin-top: 50px;
+margin-bottom: 50px;
 font-size: 1.8em;
 color: whitesmoke;
+border: solid;
 }
 
 .connexionPage
@@ -434,5 +429,8 @@ color: whitesmoke;
   padding: 30px;
 }
 
-
-
+/*Modification code css origine*/
+#dataTable_info
+{
+  display:none;
+}

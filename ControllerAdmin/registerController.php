@@ -4,6 +4,8 @@ $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $userManager = new \Model\UserManagerPDO($dao);
 
 ob_start();
+$messageOk = "ok";
+$messageNo = "no";
 
 if (isset($_POST['familyName']))
 {
@@ -44,37 +46,37 @@ if (isset($_POST['familyName']))
                             if($user->isValid())
                             {
                                 $userManager->save($user);
-                                $message = '<p id="messageRegister">L\'utilisateur a bien été ajouté !<p/>';
+                                $message = '<p id="message" title="ok">L\'utilisateur a bien été ajouté !<p/>';
                             }
                         }
                         else
                         {
-                            $message = '<p id="messageProbleme">L\'adresse mail est déjà utilisé dans un autre compte !<p/>';
+                            $message = '<p id="message" title="no">L\'adresse mail est déjà utilisé dans un autre compte !<p/>';
                         }
                     }
                     else
                     {
-                        $message = '<p id="messageProbleme">L\'adresse mail n\'est pas valide !<p/>';
+                        $message = '<p id="message" title="no">L\'adresse mail n\'est pas valide !<p/>';
                     }
                 }
                 else
                 {
-                    $message = '<p id="messageProbleme">Les emails ne correspondent pas !<p/>';
+                    $message = '<p id="message" title="no">Les emails ne correspondent pas !<p/>';
                 }
             }
             else
             {
-                $message = '<p id="messageProbleme">Les mots de passe ne correspondent pas !<p/>';
+                $message = '<p id="message" title="no">Les mots de passe ne correspondent pas !<p/>';
             }
         }
         else
         {
-            $message = '<p id="messageProbleme">Le prénom ne doit pas dépasser 255 caractères !<p/>';
+            $message = '<p id="message" title="no">Le prénom ne doit pas dépasser 255 caractères !<p/>';
         }
     }
     else
     {
-        $message = '<p id="messageProbleme">Le nom de famille ne doit pas dépasser 255 caractères !<p/>';
+        $message = '<p id="message" title="no">Le nom de famille ne doit pas dépasser 255 caractères !<p/>';
     }
 }
 ?>

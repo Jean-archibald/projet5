@@ -40,9 +40,9 @@ include('Web/inc/allpages/logoutModalAdmin.php');
 include('Web/inc/allpages/scriptAdmin.php'); 
 ?>
 
-<!-- Script Write   -->
+<!-- Script Perso   -->
 <?php
-include('Web/inc/homepageadmin/scriptwrite.php'); 
+include('Web/inc/homepageadmin/scriptPerso.php'); 
 ?>
 
 <!-- script Ckeditor -->

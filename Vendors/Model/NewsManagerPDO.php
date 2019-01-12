@@ -106,6 +106,40 @@ class NewsManagerPDO extends NewsManager
     } 
 
     /**
+     * @see NewsManager::getListPublish()
+     */
+    public function getListByCategoryAdmin($category)
+    {
+        $sql = 'SELECT id, title, category, content, publish, dateCreated, dateModified 
+        FROM news
+        WHERE trash = \'non\' AND category = ?
+        ORDER BY id DESC';
+
+        //Check if the given param are int
+        
+
+        $request = $this->dao->prepare($sql);
+        $request->execute(array($category));
+        $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');
+        
+        $newsList = $request->fetchAll();
+        
+
+        // Use foreach to give instance of DateTime as created date and modified date.
+        foreach ($newsList as $news)
+        {
+            
+            $news->setDateCreated(new \DateTime($news->dateCreated()));
+            $news->setDateModified(new \DateTime($news->dateModified()));
+        }
+
+        $request->closeCursor();
+
+        return $newsList;
+    } 
+
+
+    /**
      * @see NewsManager::getList()
      */
     public function getList($start = -1, $limit = -1)

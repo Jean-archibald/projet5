@@ -33,11 +33,11 @@ $title = 'Êtes vous sûr de vouloir supprimer l\'article ' . $newsToDeleteTitle
 if (isset($_POST['delete']) && $_POST['delete'] == 'oui')
 {
     $manager->delete($newsToDeleteId);
-    $message = '<p class="messageSuppression">L\'article a bien été supprimé!<p/>';
+    $message = '<p id="message" title="info">L\'article a bien été supprimé!<p/>';
 }
 elseif(isset($_POST['delete']) && $_POST['delete'] == 'non')
 {
-    $message = '<p class="messageInfo">L\'article est toujours dans la corbeille!<p/>';
+    $message = '<p id="message" title="info">L\'article est toujours dans la corbeille!<p/>';
 }
 $newsInTrash = $manager->countTrash();
 ?>

@@ -32,7 +32,7 @@ if ($id != 0)
     {
         $manager->save($newsToPublish);
 
-        $message = '<p class="messageInfo">L\'article '. $newsTitle .'a bien été mis dans les brouillons.</p>';
+        $message = '<p id="message" title="info">L\'article '. $newsTitle .'a bien été mis dans les brouillons.</p>';
     }
     else
     {

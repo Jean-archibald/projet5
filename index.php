@@ -29,6 +29,7 @@ elseif(preg_match('#sessiondestroy#', $url , $params))
 elseif(preg_match('#accueilAdmin#', $url , $params))
 {
     $content = "";
+    $category = 'medecinegenerale';
     $title = 'Blog Santé / Tableau de bord';
     $direction = 'homeAdmin';
     require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
@@ -66,6 +67,16 @@ elseif(preg_match('#articleCorbeille-([0-9]+)#', $url , $params))
     require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
 }
 
+//Placer un article dans la corbeille 2
+elseif(preg_match('#Admin-corbeille-([0-9]+)-([a-z]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $category = $params[2];
+    $direction = 'AdminTrashNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
 //Sortir un article dans la corbeille
 elseif(preg_match('#recupererArticle-([0-9]+)#', $url , $params))
 {
@@ -82,12 +93,31 @@ elseif(preg_match('#publier-article-([0-9]+)#', $url , $params))
     $direction = 'publishNews';
     require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
 }
+//Publier un article 2
+elseif(preg_match('#Admin-publier-([0-9]+)-([a-z]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $category = $params[2];
+    $direction = 'AdminPublishNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
 //Passer un article en brouillon
 elseif(preg_match('#brouillon-article-([0-9]+)#', $url , $params))
 {
     $title = 'Blog Santé / Tableau de bord';
     $id = $params[1];
     $direction = 'unpublishNews';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+//Passer un article en brouillon 2
+elseif(preg_match('#Admin-brouillon-([0-9]+)-([a-z]+)#', $url , $params))
+{
+    $title = 'Blog Santé / Tableau de bord';
+    $id = $params[1];
+    $category = $params[2];
+    $direction = 'AdminUnPublishNews';
     require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
 }
 //Supprimer un article
@@ -99,6 +129,38 @@ elseif(preg_match('#supprimerArticle-([0-9]+)#', $url , $params))
     require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
 }
 
+//list News Public by Category
+elseif(preg_match('#AdminMedecinegenerale#', $url , $params))
+{
+    $title = 'Medecine Generale';
+    $direction = 'listNewsByCategoryAdmin';
+    $category = 'medecinegenerale';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+elseif(preg_match('#AdminNutrition#', $url , $params))
+{
+    $title = 'Nutrition';
+    $direction = 'listNewsByCategoryAdmin';
+    $category = 'nutrition';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+elseif(preg_match('#AdminAllergologie#', $url , $params))
+{
+    $title = 'Allergologie';
+    $direction = 'listNewsByCategoryAdmin';
+    $category = 'allergologie';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
+
+elseif(preg_match('#AdminDivers#', $url , $params))
+{
+    $title = 'Divers';
+    $direction = 'listNewsByCategoryAdmin';
+    $category = 'divers';
+    require __DIR__.'/ControllerAdmin/validAdminConnectionTestController.php';
+}
 
 //Gestion abonné
 //ajouter
@@ -185,7 +247,7 @@ elseif(preg_match('#medecinegenerale#', $url , $params))
 {
     $title = 'Medecine Generale';
     $direction = 'listNewsPublic';
-    $category = 'medecine generale';
+    $category = 'medecinegenerale';
     require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
 }
 
@@ -219,6 +281,8 @@ elseif(preg_match('#lire-([0-9]+)#', $url , $params))
     $direction = 'uniqueNews';
     require __DIR__.'/ControllerPublic/validPublicConnectionTestController.php';
 }
+
+
 
 
 

@@ -15,11 +15,11 @@ $title = 'Supprimer abonné : ' .$userToDeleteFamilyName . ' ' . $userToDeleteFi
 if (isset($_POST['delete']) &&  ($_POST['delete']) == 'oui')
 {
     $userManager->delete($userToDeleteId);
-    $message = '<p class="messageSuppression">L\'utilisateur a bien été supprimé !<p/>';
+    $message = '<p id="message" title="info">L\'utilisateur a bien été supprimé !<p/>';
 }
 elseif(isset($_POST['delete']) && ($_POST['delete']) == 'non')
 {
-    $message = '<p class="messageValidation">L\'utilisateur est toujours inscrit !<p/>'; 
+    $message = '<p id="message" title="info">L\'utilisateur est toujours inscrit !<p/>'; 
 }
 
 ?>

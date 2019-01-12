@@ -26,7 +26,7 @@ if(isset($_POST['email']))
         }
         else
         {
-            $message = '<p id="connection">L\'adresse mail n\'est pas répertorié ou le mot de passe est invalide !<p/>';
+            $message = '<p id="message" title="noConnect">L\'adresse mail n\'est pas répertorié ou le mot de passe est invalide !<p/>';
         }
     }
 }

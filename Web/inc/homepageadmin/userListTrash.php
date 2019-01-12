@@ -1,4 +1,3 @@
-<p class="messageInfo">Il y a  <?= $usersInTrash ?> utilisateur(s) dans la corbeille </p><br/>
 <div class="card mb-3">
     <div class="card-header"><i class="fas fa-table"></i>Liste des abonnés dans la corbeille</div>
         <div class="card-body">

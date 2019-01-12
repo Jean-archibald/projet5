@@ -1,11 +1,8 @@
 <?php
-
 $dao = \MyFram\PDOFactory::getMySqlConnexion();
 $manager = new \Model\NewsManagerPDO($dao);
 
 ob_start();
-
-$totalNews = $manager->count();
 $newsToPublish = "";
 
 if ($id != 0)
@@ -33,10 +30,10 @@ if (isset($message))
 ?>
 <!-- News list -->
 <?php
-include('Web/inc/homepageadmin/newsList.php'); 
+include('Web/inc/homepageadmin/listNewsByCategoryAdmin.php'); 
 ?>
 
-<?php
+<?php 
 $content = ob_get_clean();
-require __DIR__.'/../ViewAdmin/listView.php';
+require __DIR__.'/../ViewAdmin/homeAdminView.php';
 ?>

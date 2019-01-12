@@ -33,27 +33,27 @@ if (isset($_POST['familyName']))
     {
         $userManager->save($userToModify);
 
-        $message = '<p id="messageRegister">L\'utilisateur a bien été modifié.<p/>';
+        $message = '<p id="message" title="ok">L\'utilisateur a bien été modifié.<p/>';
     }
 
     if (htmlspecialchars($_POST['password']) != htmlspecialchars($_POST['password2']))
     {
-        $message = '<p id="messageProbleme">Les mots de passe doivent etre identiques !<p/>';
+        $message = '<p id="message" title="no">Les mots de passe doivent etre identiques !<p/>';
     }
 
     if (strlen(htmlspecialchars($_POST['familyName'])) > 255)
     {
-        $message = '<p id="messageProbleme">Le nom de famille ne doit pas dépasser 255 caractères !<p/>';
+        $message = '<p id="message" title="no">Le nom de famille ne doit pas dépasser 255 caractères !<p/>';
     }
 
     if (strlen(htmlspecialchars($_POST['firstName'])) > 255)
     {
-        $message = '<p id="messageProbleme">Le prénom ne doit pas dépasser 255 caractères!<p/>';
+        $message = '<p id="message" title="no">Le prénom ne doit pas dépasser 255 caractères!<p/>';
     }
 
     if (htmlspecialchars($_POST['email']) != htmlspecialchars($_POST['email2']))
     {
-        $message = '<p id="messageProbleme">Les emails doivent etre identiques !<p/>';
+        $message = '<p id="message" title="no">Les emails doivent etre identiques !<p/>';
     }
     else
     {

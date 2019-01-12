@@ -34,7 +34,7 @@ if ($id != 0)
     {
         $manager->save($newsToDelete);
 
-        $message = '<p class="messageInfo">L\'article '. $newsTitle .' a bien été sorti de la Corbeille!</p>';
+        $message = '<p id="message" title="info">L\'article '. $newsTitle .' a bien été sorti de la Corbeille!</p>';
     }
     else
     {

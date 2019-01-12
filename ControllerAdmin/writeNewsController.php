@@ -33,7 +33,7 @@ if (isset($_POST['title']))
     if($news->isValid())
     {
         $manager->save($news);
-        $message = '<p id="validationMessage">L\'article a bien été ajouté.<p/>';
+        $message = '<p id="message" title="valide">L\'article a bien été ajouté.<p/>';
     }
     else
     {   
@@ -67,7 +67,7 @@ if (isset($_POST['title']))
         <p>
             <label for="category">Dans quel catégorie voulez-vous publier ?</label><br />
             <select name="category" id="category" required="required">
-                <option value="medecine generale">Medecine Générale</option>
+                <option value="medecinegenerale">Medecine Générale</option>
                 <option value="nutrition">Nutrition</option>
                 <option value="allergologie">Allergologie</option>
                 <option value="divers">divers</option>

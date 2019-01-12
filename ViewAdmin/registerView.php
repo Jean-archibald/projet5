@@ -37,9 +37,9 @@ include('Web/inc/allpages/logoutModalAdmin.php');
 ?>  
 
 
-<!-- Script Register   -->
+<!-- Script Perso   -->
 <?php
-include('Web/inc/homepageadmin/scriptregister.php'); 
+include('Web/inc/homepageadmin/scriptPerso.php'); 
 ?>
 
 <!-- Script home page Admin -->

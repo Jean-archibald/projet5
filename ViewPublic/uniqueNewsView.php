@@ -9,6 +9,7 @@ include('Web/inc/allpages/headAdmin.php');
 <body class="uniqueNews">
 
 <div class="article">
+
 <!-- Table Content -->
 <?php
 include('Web/inc/allpages/content.php'); 
@@ -18,6 +19,11 @@ include('Web/inc/allpages/content.php');
 <!-- Script home page Admin -->
 <?php
 include('Web/inc/allpages/scriptAdmin.php'); 
+?>
+
+<!-- Script Perso   -->
+<?php
+include('Web/inc/homepageadmin/scriptPerso.php'); 
 ?>
 
   </body>

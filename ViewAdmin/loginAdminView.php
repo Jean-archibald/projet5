@@ -20,7 +20,7 @@ include('Web/inc/allpages/scriptAdmin.php');
 
 <!-- Script Perso   -->
 <?php
-include('Web/inc/homepageadmin/scriptconnection.php'); 
+include('Web/inc/homepageadmin/scriptPerso.php'); 
 ?>
 
 </body>

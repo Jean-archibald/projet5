@@ -58,6 +58,14 @@ abstract class NewsManager extends Manager
      */
     abstract public function getListPublishByCategory($category );
 
+        /**
+     * Method return a list of asked chapters
+     * @param $start int The first chapter to select
+     * @param $limit int The number of chapter to select
+     * @return array The list of the chapters, Each entrance is an instance of Chapter.
+     */
+    abstract public function getListByCategoryAdmin($category );
+
      /**
      * Method return a list of asked chapters
      * @param $start int The first chapter to select

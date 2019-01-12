@@ -8,7 +8,7 @@
                   </div>
                   <div class="mr-5">Mèdecine Générale</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="AdminMedecinegenerale">
                   <span class="float-left">Voir les articles</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
@@ -24,7 +24,7 @@
                   </div>
                   <div class="mr-5">Nutrition</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="AdminNutrition">
                   <span class="float-left">Voir les articles</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
@@ -40,7 +40,7 @@
                   </div>
                   <div class="mr-5">Allergologie</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="AdminAllergologie">
                   <span class="float-left">Voir les articles</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
@@ -56,7 +56,7 @@
                   </div>
                   <div class="mr-5">Divers</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="AdminDivers">
                   <span class="float-left">Voir les articles</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>

@@ -22,7 +22,7 @@ if (isset($_POST['title']))
     if($newsToModify->isValid())
     {
         $manager->save($newsToModify);
-        $message = '<p id="validationMessage">L\'article a bien été modifié.<p/>';
+        $message = '<p id="message" title="info">L\'article a bien été modifié.<p/>';
     }
     else
     {   
