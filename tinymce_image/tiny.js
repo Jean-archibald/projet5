@@ -1,8 +1,8 @@
 ﻿tinymce.init({
     selector: 'textarea',
 	height: 800,
-    plugins: 'image code',
-    toolbar: 'undo redo | image code',
+    plugins: [ 'image code media link', ],
+    toolbar: ['undo redo | image | link | media' ,],
     
     // without images_upload_url set, Upload tab won't show up
     images_upload_url: 'tinymce_image/upload.php',
