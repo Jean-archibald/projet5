@@ -377,9 +377,31 @@ body.sidebar-toggled footer.sticky-footer {
 
 /*AJOUT PERSO*/
 
+/*pagination*/
+.pag
+{
+display: flex;
+justify-content: space-around;
+max-width: 100px;
+margin: 0 auto;
+color: white;
+padding-bottom: 25px;
+}
+
+.pagButton
+{
+color: white;
+}
+/*information message*/
+.information
+{
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 1.5em;
+}
+
 /*delete design*/
-
-
 .divDelete
 {
   text-align: center;
@@ -430,7 +452,46 @@ border: solid;
   display:none;
 }
 
+#dataTable_length
+{
+  display: none;
+}
+
+#dataTable_previous
+{
+  display: none;
+}
+
+#dataTable_next
+{
+  display: none;
+}
+
+#dataTable_filter
+{
+  display: none;
+}
+
+.page-link
+{
+  display: none;
+}
+
 .writeCss
 {
   color: white;
+}
+
+
+/*RESPONSIVE*/
+@media screen and (max-width:800px) {
+	tr {
+    display:flex;
+  }
+  td{
+    min-width: 50%;
+  }
+  .blind{
+  display: none;
+  }
 }
