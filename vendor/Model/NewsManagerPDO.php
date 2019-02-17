@@ -48,22 +48,24 @@ class NewsManagerPDO extends NewsManager
         return $this->dao->query('SELECT COUNT(*) FROM news WHERE trash=\'oui\'')->fetchColumn();
     }
 
-      /**
-     * @see NewsManager::countSearch()
+    /**
+     * @see NewsManager::countCategory()
      */
-    public function countTitleSearch($q)
+    public function countNewsByCategoryAdmin($category)
     {
-        return $this->dao->query('SELECT COUNT(*) FROM news WHERE title LIKE "%'.$q.'%"')->fetchColumn();
+        return $this->dao->query('SELECT COUNT(*) FROM news WHERE category = "'.$category.'" AND trash=\'non\' ORDER BY id DESC')->fetchColumn();
     }
 
      /**
-     * @see NewsManager::countSearch()
+     * @see NewsManager::countCategory()
      */
-    public function countContentSearch($q)
+    public function countNewsByCategoryPublic($category)
     {
-        return $this->dao->query('SELECT COUNT(*) FROM news WHERE content LIKE "%'.$q.'%"')->fetchColumn();
+        return $this->dao->query('SELECT COUNT(*) FROM news WHERE category = "'.$category.'" AND trash=\'non\' AND publish=\'oui\' ORDER BY id DESC')->fetchColumn();
     }
 
+    
+    
     /**
      * @see NewsManager::delete()
      */
@@ -75,7 +77,7 @@ class NewsManagerPDO extends NewsManager
     /**
      * @see NewsManager::getListPublish()
      */
-    public function getListPublishByCategory($category)
+    public function getListPublishByCategory($start = -1, $limit = -1,$category)
     {
         $sql = 'SELECT id, title, category, content, publish, dateCreated, dateModified 
         FROM news
@@ -83,6 +85,10 @@ class NewsManagerPDO extends NewsManager
         ORDER BY id DESC';
 
         //Check if the given param are int
+        if ($start != -1 || $limit != -1)
+        {
+            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
+        }
         
 
         $request = $this->dao->prepare($sql);
@@ -108,7 +114,7 @@ class NewsManagerPDO extends NewsManager
     /**
      * @see NewsManager::getListPublish()
      */
-    public function getListByCategoryAdmin($category)
+    public function getListByCategoryAdmin($start = -1, $limit = -1,$category)
     {
         $sql = 'SELECT id, title, category, content, publish, dateCreated, dateModified 
         FROM news
@@ -116,8 +122,11 @@ class NewsManagerPDO extends NewsManager
         ORDER BY id DESC';
 
         //Check if the given param are int
+        if ($start != -1 || $limit != -1)
+        {
+            $sql .= ' LIMIT '.(int) $limit.' OFFSET '.(int) $start;
+        }
         
-
         $request = $this->dao->prepare($sql);
         $request->execute(array($category));
         $request->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\News');

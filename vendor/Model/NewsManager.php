@@ -20,7 +20,7 @@ abstract class NewsManager extends Manager
     abstract public function count();
 
     /**
-    * Method to tell the number of chapter to publish
+    * Method to tell the number of chapter which are publish
     * @return int
     */
     abstract public function countPublish();
@@ -32,16 +32,18 @@ abstract class NewsManager extends Manager
     abstract public function countTrash();
 
      /**
-    * Method to tell the number of chapter in the search bar
+    * Method to tell the number of chapter of a category
     * @return int
     */
-    abstract public function countTitleSearch($q);
+    abstract public function countNewsByCategoryAdmin($category);
 
-    /**
-    * Method to tell the number of chapter in the search bar
+      /**
+    * Method to tell the number of chapter of a category for public
     * @return int
     */
-    abstract public function countContentSearch($q);
+    abstract public function countNewsByCategoryPublic($category);
+
+   
 
     /**
      * Method to delete a chapter
@@ -56,7 +58,7 @@ abstract class NewsManager extends Manager
      * @param $limit int The number of chapter to select
      * @return array The list of the chapters, Each entrance is an instance of Chapter.
      */
-    abstract public function getListPublishByCategory($category );
+    abstract public function getListPublishByCategory($start = -1, $limit = -1,$category);
 
         /**
      * Method return a list of asked chapters
@@ -64,7 +66,7 @@ abstract class NewsManager extends Manager
      * @param $limit int The number of chapter to select
      * @return array The list of the chapters, Each entrance is an instance of Chapter.
      */
-    abstract public function getListByCategoryAdmin($category );
+    abstract public function getListByCategoryAdmin($start = -1, $limit = -1,$category);
 
      /**
      * Method return a list of asked chapters
